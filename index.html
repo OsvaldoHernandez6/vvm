@@ -1,0 +1,1997 @@
+<title>Comunidad VVM</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600;700&display=swap">
+
+<style>
+/* ── Tokens ── */
+:root {
+  --brand:       #2E6B48;
+  --brand-mid:   #3D8A60;
+  --brand-light: #4FAD78;
+  --brand-pale:  #E6F4EC;
+  --gold:        #A67C3A;
+  --gold-light:  #C9A05A;
+  --gold-pale:   #FBF3E6;
+
+  --bg:          #F5F8F5;
+  --surface:     #FFFFFF;
+  --surface2:    #EBF0EC;
+  --border:      #D0DAD3;
+  --text:        #162019;
+  --muted:       #5E7266;
+
+  --urgent:      #C0291C;
+  --urgent-fg:   #FFFFFF;
+  --imp:         #1C4D8C;
+  --imp-fg:      #FFFFFF;
+  --imp-soft:    #EBF1FB;
+  --tag-bg:      #E2EBF8;
+  --tag-fg:      #1C4D8C;
+
+  --green-soft:  #E6F4EC;
+  --green-tag:   #1E5235;
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+  --brand:       #4FAD78;
+  --brand-mid:   #68C98F;
+  --brand-light: #80D9A5;
+  --brand-pale:  #0E2018;
+  --gold:        #C9A05A;
+  --gold-light:  #DDB978;
+  --bg:          #111613;
+  --surface:     #1A201C;
+  --surface2:    #222B25;
+  --border:      #2E3D33;
+  --text:        #E2EDE5;
+  --muted:       #7A9482;
+  --urgent:      #C0291C;
+  --urgent-fg:   #FFFFFF;
+  --imp:         #4A84D4;
+  --imp-soft:    #0D1D38;
+  --tag-bg:      #152039;
+  --tag-fg:      #7AAEE0;
+  --green-soft:  #122A1C;
+  --green-tag:   #5DC487;
+}
+
+
+/* ── Reset ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+
+/* ── NAV ── */
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding-block: 0;
+}
+
+.nav-inner {
+  max-width: 980px;
+  margin-inline: auto;
+  padding-inline: 24px;
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 52px;
+}
+
+.nav-logo {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  letter-spacing: 0.02em;
+}
+
+.nav-logo-badge {
+  width: 28px;
+  height: 28px;
+  background: var(--brand);
+  border-radius: 5px;
+  display: grid;
+  place-items: center;
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0.05em;
+  flex-shrink: 0;
+  font-family: 'DM Sans', sans-serif;
+}
+
+.nav-tagline {
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-weight: 500;
+  font-family: 'DM Sans', sans-serif;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.nav-links {
+  display: flex;
+  gap: 0;
+  list-style: none;
+}
+
+.nav-links a {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  padding-inline: 14px;
+  height: 100%;
+  transition: color 0.15s, background 0.15s;
+  border-bottom: 2px solid transparent;
+}
+
+.nav-links a:hover {
+  color: var(--brand);
+  border-bottom-color: var(--brand);
+}
+
+/* ── HERO ── */
+.hero {
+  position: relative;
+  background: var(--brand-pale);
+  border-bottom: 1px solid var(--border);
+  overflow: hidden;
+  padding: 56px 24px 52px;
+}
+
+.hero-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+.hero-inner {
+  position: relative;
+  max-width: 980px;
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.hero-eyebrow {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--brand);
+}
+
+.hero-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(2.4rem, 5vw, 3.6rem);
+  font-weight: 900;
+  color: var(--text);
+  line-height: 1.05;
+  text-wrap: balance;
+  max-width: 14ch;
+}
+
+.hero-title em {
+  font-style: italic;
+  color: var(--brand);
+}
+
+.hero-desc {
+  font-size: 0.95rem;
+  color: var(--muted);
+  max-width: 52ch;
+  line-height: 1.65;
+}
+
+.hero-stats {
+  display: flex;
+  gap: 36px;
+  margin-top: 8px;
+  flex-wrap: wrap;
+}
+
+.hero-stat-value {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.hero-stat-label {
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 3px;
+}
+
+.hero-divider {
+  width: 1px;
+  background: var(--border);
+  align-self: stretch;
+}
+
+/* ── LAYOUT ── */
+.main {
+  max-width: 980px;
+  margin-inline: auto;
+  padding: 48px 24px 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 64px;
+}
+
+/* ── SECTION HEADERS ── */
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 22px;
+}
+
+.section-accent {
+  width: 4px;
+  height: 22px;
+  background: var(--gold);
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.section-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text);
+  text-wrap: balance;
+}
+
+.section-rule {
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+/* ── URGENTE ── */
+.urgente-card {
+  background: var(--urgent);
+  border-radius: 14px;
+  padding: 0;
+  overflow: hidden;
+  position: relative;
+  display: grid;
+  grid-template-columns: 6px 1fr;
+}
+
+.urgente-stripe {
+  background: repeating-linear-gradient(
+    -45deg,
+    rgba(255,255,255,0.25) 0px,
+    rgba(255,255,255,0.25) 4px,
+    transparent 4px,
+    transparent 12px
+  );
+}
+
+.urgente-body-wrap {
+  padding: 28px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.urgente-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.7);
+}
+
+.urgente-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #FFFFFF;
+  animation: blink 1.8s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.7); }
+}
+
+.urgente-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.45rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  line-height: 1.25;
+  text-wrap: balance;
+}
+
+.urgente-text {
+  font-size: 0.92rem;
+  color: rgba(255,255,255,0.88);
+  max-width: 64ch;
+  line-height: 1.6;
+}
+
+.urgente-meta {
+  font-size: 0.73rem;
+  font-weight: 500;
+  color: rgba(255,255,255,0.5);
+  letter-spacing: 0.02em;
+  margin-top: 4px;
+}
+
+/* ── NOTICIAS ── */
+.noticias-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+/* Featured (first card spans 2 rows) */
+.noticia-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 22px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: border-color 0.15s;
+}
+
+.noticia-card:hover { border-color: var(--muted); }
+
+.noticia-card.featured {
+  grid-row: span 2;
+  border-left: 4px solid var(--imp);
+  background: var(--imp-soft);
+}
+
+.noticia-card.important {
+  border-left: 4px solid var(--imp);
+}
+
+.noticia-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 9px;
+  border-radius: 99px;
+  font-size: 0.67rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  background: var(--tag-bg);
+  color: var(--tag-fg);
+  width: fit-content;
+}
+
+.noticia-tag.green {
+  background: var(--green-soft);
+  color: var(--green-tag);
+}
+
+.noticia-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  line-height: 1.3;
+  text-wrap: balance;
+  color: var(--text);
+}
+
+.featured .noticia-title { font-size: 1.25rem; }
+
+.noticia-body {
+  font-size: 0.88rem;
+  color: var(--muted);
+  line-height: 1.6;
+  flex: 1;
+}
+
+.noticia-date {
+  font-size: 0.73rem;
+  color: var(--muted);
+  font-weight: 500;
+  padding-top: 8px;
+  border-top: 1px solid var(--border);
+}
+
+/* ── GASTOS ── */
+.gastos-layout {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 16px;
+  align-items: start;
+}
+
+.gasto-highlight {
+  background: var(--brand);
+  border-radius: 14px;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  position: relative;
+  overflow: hidden;
+}
+
+.gasto-highlight::before {
+  content: '';
+  position: absolute;
+  top: -40px;
+  right: -40px;
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.07);
+}
+
+.gasto-highlight::after {
+  content: '';
+  position: absolute;
+  bottom: -30px;
+  left: -30px;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.04);
+}
+
+.gasto-eyebrow {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.65);
+}
+
+.gasto-amount {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 2.8rem;
+  font-weight: 900;
+  color: #FFFFFF;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.gasto-period {
+  font-size: 0.82rem;
+  color: rgba(255,255,255,0.55);
+  margin-top: 4px;
+}
+
+.gasto-deadline {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255,255,255,0.15);
+  padding: 6px 12px;
+  border-radius: 99px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: rgba(255,255,255,0.9);
+  margin-top: 12px;
+  width: fit-content;
+}
+
+.gasto-deadline::before {
+  content: '⏰';
+  font-size: 0.8rem;
+}
+
+.gastos-right {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.gasto-block {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.gasto-block-title {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 4px;
+}
+
+.gasto-block p {
+  font-size: 0.88rem;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.gasto-block strong { color: var(--text); font-weight: 600; }
+
+.gasto-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.gasto-bar-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.gasto-bar-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.83rem;
+}
+
+.gasto-bar-label { color: var(--muted); }
+.gasto-bar-pct { font-weight: 700; font-variant-numeric: tabular-nums; }
+
+.gasto-bar-track {
+  height: 6px;
+  background: var(--surface2);
+  border-radius: 99px;
+  overflow: hidden;
+}
+
+.gasto-bar-fill {
+  height: 100%;
+  background: var(--brand-light);
+  border-radius: 99px;
+  transition: width 0.6s ease;
+}
+
+/* ── COMITÉS ── */
+.comite-intro {
+  background: var(--green-soft);
+  border-left: 3px solid var(--brand-light);
+  border-radius: 0 10px 10px 0;
+  padding: 16px 20px;
+  font-size: 0.88rem;
+  color: var(--muted);
+  line-height: 1.7;
+  margin-bottom: 18px;
+}
+
+.comite-intro strong { color: var(--text); }
+
+.comites-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 14px;
+}
+
+.comite-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.comite-card-head {
+  background: var(--brand-pale);
+  border-bottom: 1px solid var(--border);
+  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.comite-card-name {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--brand);
+}
+
+.comite-card-badge {
+  font-size: 0.64rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  background: rgba(46,107,72,0.12);
+  color: var(--brand);
+  padding: 3px 8px;
+  border-radius: 99px;
+}
+
+.comite-card-body {
+  padding: 16px 18px;
+}
+
+.comite-roles {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.comite-roles li {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.83rem;
+  gap: 8px;
+  padding-bottom: 7px;
+  border-bottom: 1px solid var(--border);
+}
+
+.comite-roles li:last-child { border-bottom: none; padding-bottom: 0; }
+.comite-roles .role { color: var(--muted); font-weight: 300; }
+.comite-roles .person { font-weight: 600; text-align: right; }
+
+/* ── PROYECTOS ── */
+.proyectos-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.proyecto-item {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 18px 22px;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: start;
+  gap: 18px;
+}
+
+.proyecto-estado {
+  flex-shrink: 0;
+  padding: 4px 11px;
+  border-radius: 99px;
+  font-size: 0.67rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.estado-activo  { background: #D1FAE5; color: #065F46; }
+.estado-carpeta { background: #FEF3C7; color: #92400E; }
+
+[data-theme="dark"] .estado-activo  { background: #064E3B; color: #6EE7B7; }
+[data-theme="dark"] .estado-carpeta { background: #451A03; color: #FCD34D; }
+[data-theme="dark"] .comite-card-head { background: #0E2018; }
+[data-theme="dark"] .comite-card-badge { background: rgba(79,173,120,0.15); }
+
+
+.proyecto-info { flex: 1; }
+.proyecto-titulo { font-weight: 600; font-size: 0.95rem; margin-bottom: 3px; }
+.proyecto-desc   { font-size: 0.83rem; color: var(--muted); line-height: 1.5; }
+
+.proyecto-progress {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+  min-width: 36px;
+}
+
+/* ── DOCUMENTOS ── */
+.docs-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 10px;
+}
+
+.doc-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 18px;
+  background: var(--surface);
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  text-decoration: none;
+  color: var(--text);
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.doc-item:hover { background: var(--surface2); border-color: var(--muted); }
+
+.doc-icon {
+  width: 40px;
+  height: 40px;
+  background: var(--surface2);
+  border-radius: 8px;
+  display: grid;
+  place-items: center;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  flex-shrink: 0;
+  border: 1px solid var(--border);
+}
+
+.doc-text { flex: 1; }
+.doc-name { font-weight: 600; font-size: 0.9rem; }
+.doc-sub  { font-size: 0.76rem; color: var(--muted); margin-top: 2px; }
+.doc-arrow { color: var(--muted); opacity: 0.6; font-size: 1.1rem; }
+
+/* ── CONTACTOS ── */
+.contactos-section { display: flex; flex-direction: column; gap: 20px; }
+
+.contactos-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+@media (max-width: 640px) {
+  .contactos-row { grid-template-columns: 1fr; }
+}
+
+.contacto-grupo { display: flex; flex-direction: column; }
+.contacto-grupo-title {
+  font-size: 0.63rem;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 8px;
+  padding-left: 2px;
+}
+.contacto-card {
+  flex: 1;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  border-top: 3px solid var(--brand-mid);
+}
+.contacto-role {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text);
+}
+.contacto-email {
+  font-size: 0.83rem;
+  color: var(--brand);
+  text-decoration: none;
+  word-break: break-all;
+}
+.contacto-email:hover { text-decoration: underline; }
+
+/* ── CARRUSEL GENÉRICO ── */
+.carousel-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+.car-nav-btn {
+  width: 36px; height: 36px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  font-size: 1.2rem;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  transition: background 0.15s, border-color 0.15s;
+  line-height: 1;
+  flex-shrink: 0;
+}
+.car-nav-btn:hover { background: var(--surface2); border-color: var(--muted); }
+.car-nav-btn:disabled { opacity: 0.3; cursor: default; }
+.car-month-label {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text);
+  min-width: 160px;
+}
+.car-select {
+  margin-left: auto;
+  padding: 6px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.82rem;
+  cursor: pointer;
+}
+.car-select:focus { outline: 2px solid var(--brand); outline-offset: 2px; }
+.carousel-track { overflow: hidden; }
+.carousel-slide { display: none; }
+.carousel-slide.active { display: block; }
+
+/* ── FAQ ACCORDION ── */
+.faq-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  align-items: start;
+}
+.faq-item {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 11px;
+  overflow: hidden;
+  transition: border-color 0.15s;
+}
+.faq-item.open { border-color: var(--brand-mid); }
+.faq-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px 22px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+.faq-btn:focus-visible { outline: 2px solid var(--brand); outline-offset: -2px; }
+.faq-icon {
+  width: 26px; height: 26px;
+  border-radius: 50%;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  display: grid;
+  place-items: center;
+  font-size: 0.85rem;
+  color: var(--muted);
+  flex-shrink: 0;
+  transition: background 0.15s, transform 0.25s;
+  line-height: 1;
+}
+.faq-item.open .faq-icon {
+  background: var(--brand-pale);
+  color: var(--brand);
+  transform: rotate(45deg);
+}
+.faq-body {
+  display: none;
+  padding: 0 22px 18px;
+  font-size: 0.9rem;
+  color: var(--muted);
+  line-height: 1.7;
+  max-width: 74ch;
+}
+.faq-item.open .faq-body { display: block; }
+
+/* ── LOADING STATE ── */
+.car-loading {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 32px 0;
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+.car-spinner {
+  width: 20px; height: 20px;
+  border: 2px solid var(--border);
+  border-top-color: var(--brand);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  flex-shrink: 0;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.car-error {
+  padding: 20px 24px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  font-size: 0.88rem;
+  color: var(--muted);
+}
+#faqList > .car-loading,
+#faqList > .car-error { grid-column: 1 / -1; }
+
+/* ── UPDATES LIST (urgente apilados) ── */
+.updates-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.update-item {
+  background: var(--urgent);
+  border-radius: 12px;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 5px 1fr;
+}
+.update-stripe {
+  background: repeating-linear-gradient(
+    -45deg,
+    rgba(255,255,255,0.22) 0px,
+    rgba(255,255,255,0.22) 4px,
+    transparent 4px,
+    transparent 12px
+  );
+}
+.update-body {
+  padding: 20px 26px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.update-num {
+  font-size: 0.67rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.6);
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+.update-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: #fff;
+  animation: blink 1.8s ease-in-out infinite;
+  flex-shrink: 0;
+}
+.update-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.3;
+  text-wrap: balance;
+}
+.update-text {
+  font-size: 0.88rem;
+  color: rgba(255,255,255,0.87);
+  line-height: 1.6;
+  max-width: 68ch;
+}
+.update-meta {
+  font-size: 0.71rem;
+  color: rgba(255,255,255,0.45);
+  margin-top: 2px;
+}
+
+/* ── HERO WSP BUTTON ── */
+.hero-wsp-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #25D366;
+  color: #fff;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding: 13px 24px;
+  border-radius: 50px;
+  text-decoration: none;
+  margin-top: 8px;
+  transition: background 0.18s, transform 0.15s, box-shadow 0.18s;
+  box-shadow: 0 4px 18px rgba(37,211,102,0.32);
+  width: fit-content;
+}
+.hero-wsp-btn:hover {
+  background: #1ebe5d;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(37,211,102,0.42);
+}
+.hero-wsp-btn svg { flex-shrink: 0; }
+
+/* ── MACROLOTE SELECTOR ── */
+.macrolote-selector-wrap {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 24px 26px;
+}
+.macrolote-selector-label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 12px;
+}
+.macrolote-select-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.macrolote-select {
+  flex: 1;
+  min-width: 200px;
+  padding: 10px 14px;
+  border-radius: 9px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.92rem;
+  cursor: pointer;
+}
+.macrolote-result {
+  display: none;
+  margin-top: 14px;
+  padding: 14px 18px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  font-size: 0.9rem;
+}
+.macrolote-result.visible { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.macrolote-result-cargo { font-weight: 600; color: var(--text); }
+.macrolote-result-email { color: var(--brand); text-decoration: none; }
+.macrolote-result-email:hover { text-decoration: underline; }
+
+/* ── FOOTER ── */
+footer {
+  background: var(--surface2);
+  border-top: 1px solid var(--border);
+  padding: 28px 24px;
+  margin-top: 0;
+}
+
+.footer-inner {
+  max-width: 980px;
+  margin-inline: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.footer-logo {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.footer-meta {
+  font-size: 0.76rem;
+  color: var(--muted);
+}
+
+/* ── ACCESIBILIDAD CONTROLES ── */
+.a11y-bar {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  border-left: 1px solid var(--border);
+  padding-left: 14px;
+  margin-left: 4px;
+  flex-shrink: 0;
+}
+
+.a11y-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--muted);
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+  font-family: 'DM Sans', sans-serif;
+  line-height: 1;
+}
+
+.a11y-btn:hover {
+  background: var(--surface2);
+  color: var(--text);
+  border-color: var(--muted);
+}
+
+.a11y-btn:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 2px;
+}
+
+.theme-btn {
+  width: auto;
+  padding-inline: 10px;
+  gap: 6px;
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 700px) {
+  .nav-links { display: none; }
+  .noticias-grid { grid-template-columns: 1fr; }
+  .noticias-grid .featured { grid-row: auto; }
+  .gastos-layout { grid-template-columns: 1fr; }
+  .main { padding-inline: 16px; gap: 48px; }
+  .hero { padding: 36px 16px 32px; }
+  .proyecto-item { grid-template-columns: auto 1fr; }
+  .proyecto-progress { display: none; }
+  .faq-list { grid-template-columns: 1fr; }
+}
+</style>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">
+      <div class="nav-logo-badge">VVM</div>
+      <span class="nav-tagline">Portal Comunitario</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#urgente">Urgente</a></li>
+      <li><a href="#noticias">Noticias</a></li>
+      <li><a href="#faq">Preguntas</a></li>
+      <li><a href="#gastos">Gastos</a></li>
+      <li><a href="#comites">Comités</a></li>
+      <li><a href="#proyectos">Proyectos</a></li>
+      <li><a href="#documentos">Documentos</a></li>
+      <li><a href="#contactos">Contactos</a></li>
+    </ul>
+
+    <div class="a11y-bar">
+      <button class="a11y-btn" id="fontDown" title="Achicar texto" aria-label="Achicar texto">A−</button>
+      <button class="a11y-btn" id="fontUp" title="Agrandar texto" aria-label="Agrandar texto">A+</button>
+      <button class="a11y-btn theme-btn" id="themeToggle" aria-label="Cambiar tema">
+        <span id="themeIcon">🌙</span>
+        <span id="themeLabel">Oscuro</span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <canvas class="hero-canvas" id="topoCanvas"></canvas>
+  <div class="hero-inner">
+    <span class="hero-eyebrow">Valle Verde Mar · Portal Comunitario</span>
+    <h1 class="hero-title">Un lugar diferente<br><em>para Vivir</em></h1>
+    <p class="hero-desc">Toda la información de Valle Vista Macrolotes en un solo lugar. Transparente, directa y siempre actualizada por tus comités.</p>
+    <a class="hero-wsp-btn" href="https://wa.me/56982760850" target="_blank" rel="noopener">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+      Portería Valle Verde Mar
+    </a>
+  </div>
+</div>
+
+<main class="main">
+
+  <!-- UPDATE DIARIO -->
+  <section id="urgente">
+    <div class="section-header">
+      <div class="section-accent"></div>
+      <h2 class="section-title">🚨 Update</h2>
+      <div class="section-rule"></div>
+    </div>
+    <div class="carousel-header">
+      <button class="car-nav-btn" id="updPrev" aria-label="Mes anterior">‹</button>
+      <span class="car-month-label" id="updLabel"></span>
+      <button class="car-nav-btn" id="updNext" aria-label="Mes siguiente">›</button>
+      <select class="car-select" id="updSelect" aria-label="Seleccionar mes"></select>
+    </div>
+    <div class="carousel-track" id="updTrack"></div>
+  </section>
+
+  <!-- NOTICIAS -->
+  <section id="noticias">
+    <div class="section-header">
+      <div class="section-accent"></div>
+      <h2 class="section-title">📢 Noticias Importantes</h2>
+      <div class="section-rule"></div>
+    </div>
+
+    <!-- Controles del carrusel -->
+    <div class="carousel-header">
+      <button class="car-nav-btn" id="carPrev" aria-label="Mes anterior">‹</button>
+      <span class="car-month-label" id="carLabel"></span>
+      <button class="car-nav-btn" id="carNext" aria-label="Mes siguiente">›</button>
+      <select class="car-select" id="carSelect" aria-label="Seleccionar mes"></select>
+    </div>
+
+    <!-- Slides por mes (generados por JS) -->
+    <div class="carousel-track" id="carTrack"></div>
+  </section>
+
+  <!-- PREGUNTAS FRECUENTES -->
+  <section id="faq">
+    <div class="section-header">
+      <div class="section-accent"></div>
+      <h2 class="section-title">❓ Preguntas Frecuentes</h2>
+      <div class="section-rule"></div>
+    </div>
+    <div class="faq-list" id="faqList">
+      <div class="car-loading"><div class="car-spinner"></div>Cargando preguntas…</div>
+    </div>
+  </section>
+
+  <!-- GASTOS COMUNES -->
+  <section id="gastos">
+    <div class="section-header">
+      <div class="section-accent"></div>
+      <h2 class="section-title">Gastos Comunes</h2>
+      <div class="section-rule"></div>
+    </div>
+    <div class="gastos-layout">
+      <div class="gasto-highlight">
+        <span class="gasto-eyebrow">Cuota mensual</span>
+        <div class="gasto-amount">$18.500</div>
+        <p class="gasto-period">Por parcela · Todas las etapas</p>
+        <span class="gasto-deadline">Vence el 15 de cada mes</span>
+      </div>
+      <div class="gastos-right">
+        <div class="gasto-block">
+          <span class="gasto-block-title">Cómo pagar</span>
+          <p>Transferencia a <strong>Comunidad VVM · Banco Estado</strong><br>
+          Cta. cte. 00-123456-78 · RUT 65.432.100-9<br>
+          Asunto: <strong>Parcela N° + tu número</strong></p>
+        </div>
+        <div class="gasto-block">
+          <span class="gasto-block-title">En qué se gasta</span>
+          <div class="gasto-bars">
+            <div class="gasto-bar-item">
+              <div class="gasto-bar-header">
+                <span class="gasto-bar-label">Mantención caminos</span>
+                <span class="gasto-bar-pct">40%</span>
+              </div>
+              <div class="gasto-bar-track"><div class="gasto-bar-fill" style="width:40%"></div></div>
+            </div>
+            <div class="gasto-bar-item">
+              <div class="gasto-bar-header">
+                <span class="gasto-bar-label">Seguridad 24 hrs</span>
+                <span class="gasto-bar-pct">30%</span>
+              </div>
+              <div class="gasto-bar-track"><div class="gasto-bar-fill" style="width:30%"></div></div>
+            </div>
+            <div class="gasto-bar-item">
+              <div class="gasto-bar-header">
+                <span class="gasto-bar-label">Áreas verdes y limpieza</span>
+                <span class="gasto-bar-pct">20%</span>
+              </div>
+              <div class="gasto-bar-track"><div class="gasto-bar-fill" style="width:20%"></div></div>
+            </div>
+            <div class="gasto-bar-item">
+              <div class="gasto-bar-header">
+                <span class="gasto-bar-label">Administración general</span>
+                <span class="gasto-bar-pct">10%</span>
+              </div>
+              <div class="gasto-bar-track"><div class="gasto-bar-fill" style="width:10%"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMITÉS -->
+  <section id="comites">
+    <div class="section-header">
+      <div class="section-accent"></div>
+      <h2 class="section-title">Comités</h2>
+      <div class="section-rule"></div>
+    </div>
+    <div class="comite-intro">
+      La comunidad VVM se organiza en <strong>comités por etapa</strong>, elegidos por los propios vecinos — presidente, tesorero, secretario y directivo. Todos son <strong>voluntarios no remunerados</strong>. Los comités de etapa conforman el <strong>Comité General</strong>, que toma decisiones que afectan a toda la comunidad.
+    </div>
+    <div class="comites-grid">
+      <div class="comite-card">
+        <div class="comite-card-head">
+          <span class="comite-card-name">Comité General</span>
+          <span class="comite-card-badge">Mesa directiva</span>
+        </div>
+        <div class="comite-card-body">
+          <ul class="comite-roles">
+            <li><span class="role">Presidente</span><span class="person">Juan Pérez M.</span></li>
+            <li><span class="role">Secretaria</span><span class="person">Ana Torres R.</span></li>
+            <li><span class="role">Tesorero</span><span class="person">Carlos Ruiz V.</span></li>
+            <li><span class="role">Administración</span><span class="person">Soledad Vera L.</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="comite-card">
+        <div class="comite-card-head">
+          <span class="comite-card-name">Comité Etapa 1</span>
+          <span class="comite-card-badge">Etapa 1</span>
+        </div>
+        <div class="comite-card-body">
+          <ul class="comite-roles">
+            <li><span class="role">Presidente</span><span class="person">Rodrigo Soto A.</span></li>
+            <li><span class="role">Secretaria</span><span class="person">Marcela Díaz F.</span></li>
+            <li><span class="role">Tesorero</span><span class="person">Felipe Morales C.</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="comite-card">
+        <div class="comite-card-head">
+          <span class="comite-card-name">Comité Etapa 2</span>
+          <span class="comite-card-badge">Etapa 2</span>
+        </div>
+        <div class="comite-card-body">
+          <ul class="comite-roles">
+            <li><span class="role">Presidente</span><span class="person">Verónica Lagos P.</span></li>
+            <li><span class="role">Secretaria</span><span class="person">Pilar Navarro B.</span></li>
+            <li><span class="role">Tesorero</span><span class="person">Sergio Fuentes G.</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROYECTOS -->
+  <section id="proyectos">
+    <div class="section-header">
+      <div class="section-accent"></div>
+      <h2 class="section-title">Proyectos y Obras</h2>
+      <div class="section-rule"></div>
+    </div>
+    <div class="proyectos-list">
+      <div class="proyecto-item">
+        <span class="proyecto-estado estado-activo">En ejecución</span>
+        <div class="proyecto-info">
+          <p class="proyecto-titulo">Repavimentación camino principal Etapa 1</p>
+          <p class="proyecto-desc">Trabajos en la vía de acceso central. Finalización prevista octubre 2026.</p>
+        </div>
+        <div class="proyecto-progress">60%</div>
+      </div>
+      <div class="proyecto-item">
+        <span class="proyecto-estado estado-activo">En ejecución</span>
+        <div class="proyecto-info">
+          <p class="proyecto-titulo">Instalación de iluminación LED sectores nocturnos</p>
+          <p class="proyecto-desc">Etapas 1 y 2. Se reemplazan 48 luminarias. Fin estimado diciembre 2026.</p>
+        </div>
+        <div class="proyecto-progress">30%</div>
+      </div>
+      <div class="proyecto-item">
+        <span class="proyecto-estado estado-carpeta">En carpeta</span>
+        <div class="proyecto-info">
+          <p class="proyecto-titulo">Construcción sede comunitaria Etapa 2</p>
+          <p class="proyecto-desc">Aprobado en asamblea de abril. Pendiente licitación de construcción.</p>
+        </div>
+        <div class="proyecto-progress">—</div>
+      </div>
+      <div class="proyecto-item">
+        <span class="proyecto-estado estado-carpeta">En carpeta</span>
+        <div class="proyecto-info">
+          <p class="proyecto-titulo">Señalética vial interna unificada</p>
+          <p class="proyecto-desc">Estandarización de señales en todas las etapas. En fase de cotización.</p>
+        </div>
+        <div class="proyecto-progress">—</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DOCUMENTOS -->
+  <section id="documentos">
+    <div class="section-header">
+      <div class="section-accent"></div>
+      <h2 class="section-title">Documentos</h2>
+      <div class="section-rule"></div>
+    </div>
+    <div class="docs-list">
+      <a href="#" class="doc-item">
+        <div class="doc-icon">PDF</div>
+        <div class="doc-text">
+          <p class="doc-name">Acta Asamblea — Abril 2026</p>
+          <p class="doc-sub">Acuerdos, votaciones y presupuesto aprobado</p>
+        </div>
+        <span class="doc-arrow">↓</span>
+      </a>
+      <a href="#" class="doc-item">
+        <div class="doc-icon">PDF</div>
+        <div class="doc-text">
+          <p class="doc-name">Acta Asamblea — Octubre 2025</p>
+          <p class="doc-sub">Elección de directiva Etapa 1</p>
+        </div>
+        <span class="doc-arrow">↓</span>
+      </a>
+      <a href="#" class="doc-item">
+        <div class="doc-icon">PDF</div>
+        <div class="doc-text">
+          <p class="doc-name">Reglamento Interno — Etapa 1</p>
+          <p class="doc-sub">Versión vigente 2025</p>
+        </div>
+        <span class="doc-arrow">↓</span>
+      </a>
+      <a href="#" class="doc-item">
+        <div class="doc-icon">PDF</div>
+        <div class="doc-text">
+          <p class="doc-name">Reglamento Interno — Etapa 2</p>
+          <p class="doc-sub">Versión vigente 2024</p>
+        </div>
+        <span class="doc-arrow">↓</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- CONTACTOS -->
+  <section id="contactos">
+    <div class="section-header">
+      <div class="section-accent"></div>
+      <h2 class="section-title">Contactos</h2>
+      <div class="section-rule"></div>
+    </div>
+    <div class="contactos-section">
+
+      <!-- Tres comités en fila -->
+      <div class="contactos-row">
+        <div class="contacto-grupo">
+          <p class="contacto-grupo-title">Comité General</p>
+          <div class="contacto-card">
+            <span class="contacto-role">Comité General</span>
+            <a class="contacto-email" href="mailto:comite@vvm.cl">comite@vvm.cl</a>
+          </div>
+        </div>
+        <div class="contacto-grupo">
+          <p class="contacto-grupo-title">Comité Etapa 1</p>
+          <div class="contacto-card">
+            <span class="contacto-role">Comité Etapa 1</span>
+            <a class="contacto-email" href="mailto:etapa1@vvm.cl">etapa1@vvm.cl</a>
+          </div>
+        </div>
+        <div class="contacto-grupo">
+          <p class="contacto-grupo-title">Comité Etapa 2</p>
+          <div class="contacto-card">
+            <span class="contacto-role">Comité Etapa 2</span>
+            <a class="contacto-email" href="mailto:etapa2@vvm.cl">etapa2@vvm.cl</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Selector por Macrolote -->
+      <div class="macrolote-selector-wrap">
+        <p class="macrolote-selector-label">Contacto por Macrolote</p>
+        <div class="macrolote-select-row">
+          <select class="macrolote-select" id="macroloteSelect" onchange="showMacrolote(this.value)">
+            <option value="">— Selecciona tu macrolote —</option>
+            <option value="ML01">Macrolote 01</option>
+            <option value="ML02">Macrolote 02</option>
+            <option value="ML03">Macrolote 03</option>
+            <option value="ML04">Macrolote 04</option>
+            <option value="ML05">Macrolote 05</option>
+            <option value="ML06">Macrolote 06</option>
+            <option value="ML07">Macrolote 07</option>
+            <option value="ML08">Macrolote 08</option>
+            <option value="ML09">Macrolote 09</option>
+            <option value="ML10">Macrolote 10</option>
+            <option value="ML11">Macrolote 11</option>
+            <option value="ML12">Macrolote 12</option>
+            <option value="ML13">Macrolote 13</option>
+            <option value="ML14">Macrolote 14</option>
+            <option value="ML15">Macrolote 15</option>
+            <option value="ML16">Macrolote 16</option>
+            <option value="ML17">Macrolote 17</option>
+            <option value="ML18">Macrolote 18</option>
+            <option value="ML19">Macrolote 19</option>
+            <option value="ML20">Macrolote 20</option>
+            <option value="ML21">Macrolote 21</option>
+            <option value="ML22">Macrolote 22</option>
+            <option value="ML23">Macrolote 23</option>
+            <option value="ML24">Macrolote 24</option>
+            <option value="ML25">Macrolote 25</option>
+            <option value="ML26">Macrolote 26</option>
+            <option value="ML27">Macrolote 27</option>
+          </select>
+        </div>
+        <div class="macrolote-result" id="macroloteResult">
+          <span class="macrolote-result-cargo" id="macroloteCargo"></span>
+          <a class="macrolote-result-email" id="macroloteEmail" href="#"></a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <span class="footer-logo">Valle Verde Mar</span>
+    <span class="footer-meta">Comunidad VVM · Actualizado 10 sep 2026 · Administrado por vecinos voluntarios</span>
+  </div>
+</footer>
+
+<script>
+// Topographic canvas pattern in hero
+(function() {
+  const canvas = document.getElementById('topoCanvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+
+  function resize() {
+    canvas.width = canvas.offsetWidth * window.devicePixelRatio;
+    canvas.height = canvas.offsetHeight * window.devicePixelRatio;
+    ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+    draw();
+  }
+
+  function noise(x, y, seed) {
+    // Simple smooth noise using sin/cos harmonics
+    return Math.sin(x * 0.018 + seed) * Math.cos(y * 0.022 + seed * 0.7)
+         + Math.sin(x * 0.041 + seed * 1.3) * Math.cos(y * 0.035 + seed * 0.4) * 0.5
+         + Math.sin(x * 0.009 + seed * 2.1) * Math.cos(y * 0.011 + seed * 1.8) * 0.3;
+  }
+
+  function draw() {
+    const w = canvas.offsetWidth;
+    const h = canvas.offsetHeight;
+    ctx.clearRect(0, 0, w, h);
+
+    const levels = 14;
+    const seed = 3.7;
+
+    for (let lvl = 0; lvl < levels; lvl++) {
+      const threshold = -1.0 + (lvl / levels) * 2.0;
+      ctx.beginPath();
+
+      // March through grid finding contour crossings
+      const step = 6;
+      for (let x = 0; x < w - step; x += step) {
+        for (let y = 0; y < h - step; y += step) {
+          const v00 = noise(x,        y,        seed);
+          const v10 = noise(x + step, y,        seed);
+          const v01 = noise(x,        y + step, seed);
+          const v11 = noise(x + step, y + step, seed);
+
+          // Simple edge cases: draw short line segments where contour crosses
+          function interp(a, b, va, vb, t) {
+            if (Math.abs(vb - va) < 0.001) return a;
+            return a + (t - va) / (vb - va) * (b - a);
+          }
+
+          const crossTop    = (v00 - threshold) * (v10 - threshold) < 0;
+          const crossBottom = (v01 - threshold) * (v11 - threshold) < 0;
+          const crossLeft   = (v00 - threshold) * (v01 - threshold) < 0;
+          const crossRight  = (v10 - threshold) * (v11 - threshold) < 0;
+
+          const pts = [];
+          if (crossTop)    pts.push([interp(x, x+step, v00, v10, threshold), y]);
+          if (crossBottom) pts.push([interp(x, x+step, v01, v11, threshold), y+step]);
+          if (crossLeft)   pts.push([x,      interp(y, y+step, v00, v01, threshold)]);
+          if (crossRight)  pts.push([x+step, interp(y, y+step, v10, v11, threshold)]);
+
+          if (pts.length >= 2) {
+            ctx.moveTo(pts[0][0], pts[0][1]);
+            ctx.lineTo(pts[1][0], pts[1][1]);
+          }
+        }
+      }
+
+      ctx.strokeStyle = 'rgba(46,107,72,0.55)';
+      ctx.lineWidth = 0.7;
+      ctx.stroke();
+    }
+  }
+
+  resize();
+  window.addEventListener('resize', resize);
+})();
+
+// ════════════════════════════════════════════════════════
+//  ██████╗  CONFIG — pega aquí el ID de tu planilla
+// ════════════════════════════════════════════════════════
+var VVM_SHEET_ID = '1wDHhjRjYagqNCF09rqC65DK5-Zc_0cklJHi2HIVdnhI';
+// Para obtener el ID: abre tu planilla → la URL tiene la forma
+// https://docs.google.com/spreadsheets/d/ESTE_ES_EL_ID/edit
+// Copia solo esa parte y pégala arriba.
+
+// ── Parser CSV (maneja comillas y comas dentro de celdas) ──
+function parseCSV(text) {
+  var rows = [];
+  var lines = text.replace(/\r\n/g, '\n').replace(/\r/g, '\n').split('\n');
+  lines.forEach(function(line) {
+    if (!line.trim()) return;
+    var row = [], cur = '', inQ = false;
+    for (var i = 0; i < line.length; i++) {
+      var c = line[i];
+      if (inQ) {
+        if (c === '"' && line[i+1] === '"') { cur += '"'; i++; }
+        else if (c === '"') { inQ = false; }
+        else { cur += c; }
+      } else {
+        if (c === '"') { inQ = true; }
+        else if (c === ',') { row.push(cur.trim()); cur = ''; }
+        else { cur += c; }
+      }
+    }
+    row.push(cur.trim());
+    rows.push(row);
+  });
+  return rows;
+}
+
+// ── Leer una pestaña del sheet como CSV ──
+function fetchTab(tabName) {
+  var url = 'https://docs.google.com/spreadsheets/d/' + VVM_SHEET_ID +
+            '/gviz/tq?tqx=out:csv&sheet=' + encodeURIComponent(tabName);
+  return fetch(url).then(function(r) {
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+    return r.text();
+  }).then(function(text) {
+    var rows = parseCSV(text);
+    if (rows.length < 2) return [];
+    var headers = rows[0].map(function(h) { return h.toLowerCase(); });
+    return rows.slice(1).map(function(row) {
+      var obj = {};
+      headers.forEach(function(h, i) { obj[h] = row[i] || ''; });
+      return obj;
+    });
+  });
+}
+
+// ── Agrupar filas por mes (columna "mes") ──
+function groupByMonth(rows) {
+  var order = [], map = {};
+  rows.forEach(function(r) {
+    var m = r['mes'] || '';
+    if (!m) return;
+    if (!map[m]) { map[m] = []; order.push(m); }
+    map[m].push(r);
+  });
+  return order.map(function(m) { return { label: m, items: map[m] }; });
+}
+
+// ── Estado de carga en una sección ──
+function setLoading(trackId, msg) {
+  var t = document.getElementById(trackId);
+  if (t) t.innerHTML = '<div class="car-loading"><div class="car-spinner"></div>' + msg + '</div>';
+}
+function setError(trackId, msg) {
+  var t = document.getElementById(trackId);
+  if (t) t.innerHTML = '<div class="car-error">' + msg + '</div>';
+}
+
+// ── Función genérica de carrusel ──
+function buildCarousel(cfg) {
+  var track = document.getElementById(cfg.trackId);
+  var label = document.getElementById(cfg.labelId);
+  var prev  = document.getElementById(cfg.prevId);
+  var next  = document.getElementById(cfg.nextId);
+  var sel   = document.getElementById(cfg.selId);
+  if (!track) return;
+
+  var idx = 0;
+  var meses = cfg.meses;
+
+  meses.forEach(function(m, i) {
+    var opt = document.createElement('option');
+    opt.value = i;
+    opt.textContent = m.label;
+    sel.appendChild(opt);
+  });
+
+  meses.forEach(function(mes) {
+    var slide = document.createElement('div');
+    slide.className = 'carousel-slide';
+    slide.innerHTML = cfg.renderSlide(mes);
+    track.appendChild(slide);
+  });
+
+  function goTo(i) {
+    track.querySelectorAll('.carousel-slide')[idx].classList.remove('active');
+    idx = Math.max(0, Math.min(meses.length - 1, i));
+    track.querySelectorAll('.carousel-slide')[idx].classList.add('active');
+    label.textContent = meses[idx].label;
+    sel.value = idx;
+    prev.disabled = idx === 0;
+    next.disabled = idx === meses.length - 1;
+  }
+
+  prev.addEventListener('click', function() { goTo(idx - 1); });
+  next.addEventListener('click', function() { goTo(idx + 1); });
+  sel.addEventListener('change', function() { goTo(parseInt(sel.value)); });
+  goTo(0);
+}
+
+// ── Render slide UPDATES ──
+function renderUpdatesSlide(mes) {
+  return '<div class="updates-list">' +
+    mes.items.map(function(it, i) {
+      var n = String(i + 1).padStart(2, '0');
+      var num = 'Update ' + mes.label.split(' ')[0] + ' #' + n;
+      return '<div class="update-item">' +
+        '<div class="update-stripe"></div>' +
+        '<div class="update-body">' +
+          '<div class="update-num"><div class="update-dot"></div>' + num + '</div>' +
+          '<h3 class="update-title">' + (it['titulo'] || it['title'] || '') + '</h3>' +
+          '<p class="update-text">' + (it['texto'] || it['text'] || it['cuerpo'] || '') + '</p>' +
+          '<p class="update-meta">' + (it['fecha'] || it['date'] || '') +
+            (it['comite'] ? ' · ' + it['comite'] : '') + '</p>' +
+        '</div>' +
+      '</div>';
+    }).join('') +
+  '</div>';
+}
+
+// ── Render slide NOTICIAS ──
+function renderNoticiasSlide(mes) {
+  return '<div class="noticias-grid">' +
+    mes.items.map(function(item, j) {
+      var n = String(j + 1).padStart(2, '0');
+      var numLabel = 'Noticias ' + mes.label.split(' ')[0] + ' #' + n;
+      var tipo = (item['tipo'] || '').toLowerCase();
+      var cls = 'noticia-card' + (j === 0 ? ' featured' : '') + (tipo === 'important' ? ' important' : '');
+      var tagCls = 'noticia-tag' + (tipo === '' || tipo === 'general' ? ' green' : '');
+      return '<div class="' + cls + '">' +
+        '<span class="' + tagCls + '">' + numLabel + '</span>' +
+        '<h3 class="noticia-title">' + (item['titulo'] || item['title'] || '') + '</h3>' +
+        '<p class="noticia-body">' + (item['cuerpo'] || item['texto'] || item['body'] || '') + '</p>' +
+        '<span class="noticia-date">' + (item['fecha'] || item['date'] || '') + '</span>' +
+      '</div>';
+    }).join('') +
+  '</div>';
+}
+
+// ── Render FAQ ──
+function renderFAQ(items) {
+  var list = document.getElementById('faqList');
+  if (!list) return;
+  if (!items || !items.length) {
+    list.innerHTML = '<div class="car-error">No hay preguntas frecuentes publicadas aún.</div>';
+    return;
+  }
+  list.innerHTML = items.map(function(it, i) {
+    var p = it['pregunta'] || it['pregunta '] || '';
+    var r = it['respuesta'] || it['respuesta '] || '';
+    if (!p) return '';
+    return '<div class="faq-item" id="faq-' + i + '">' +
+      '<button class="faq-btn" onclick="toggleFAQ(' + i + ')" aria-expanded="false">' +
+        '<span>' + p + '</span>' +
+        '<span class="faq-icon" aria-hidden="true">+</span>' +
+      '</button>' +
+      '<div class="faq-body">' + r + '</div>' +
+    '</div>';
+  }).join('');
+}
+
+// ── Macrolote selector ──
+var MACROLOTE_DATA = {
+  ML01: { cargo: 'Delegado Macrolote 01', email: 'ml01@vvm.cl' },
+  ML02: { cargo: 'Delegado Macrolote 02', email: 'ml02@vvm.cl' },
+  ML03: { cargo: 'Delegado Macrolote 03', email: 'ml03@vvm.cl' },
+  ML04: { cargo: 'Delegado Macrolote 04', email: 'ml04@vvm.cl' },
+  ML05: { cargo: 'Delegado Macrolote 05', email: 'ml05@vvm.cl' },
+  ML06: { cargo: 'Delegado Macrolote 06', email: 'ml06@vvm.cl' },
+  ML07: { cargo: 'Delegado Macrolote 07', email: 'ml07@vvm.cl' },
+  ML08: { cargo: 'Delegado Macrolote 08', email: 'ml08@vvm.cl' },
+  ML09: { cargo: 'Delegado Macrolote 09', email: 'ml09@vvm.cl' },
+  ML10: { cargo: 'Delegado Macrolote 10', email: 'ml10@vvm.cl' },
+  ML11: { cargo: 'Delegado Macrolote 11', email: 'ml11@vvm.cl' },
+  ML12: { cargo: 'Delegado Macrolote 12', email: 'ml12@vvm.cl' },
+  ML13: { cargo: 'Delegado Macrolote 13', email: 'ml13@vvm.cl' },
+  ML14: { cargo: 'Delegado Macrolote 14', email: 'ml14@vvm.cl' },
+  ML15: { cargo: 'Delegado Macrolote 15', email: 'ml15@vvm.cl' },
+  ML16: { cargo: 'Delegado Macrolote 16', email: 'ml16@vvm.cl' },
+  ML17: { cargo: 'Delegado Macrolote 17', email: 'ml17@vvm.cl' },
+  ML18: { cargo: 'Delegado Macrolote 18', email: 'ml18@vvm.cl' },
+  ML19: { cargo: 'Delegado Macrolote 19', email: 'ml19@vvm.cl' },
+  ML20: { cargo: 'Delegado Macrolote 20', email: 'ml20@vvm.cl' },
+  ML21: { cargo: 'Delegado Macrolote 21', email: 'ml21@vvm.cl' },
+  ML22: { cargo: 'Delegado Macrolote 22', email: 'ml22@vvm.cl' },
+  ML23: { cargo: 'Delegado Macrolote 23', email: 'ml23@vvm.cl' },
+  ML24: { cargo: 'Delegado Macrolote 24', email: 'ml24@vvm.cl' },
+  ML25: { cargo: 'Delegado Macrolote 25', email: 'ml25@vvm.cl' },
+  ML26: { cargo: 'Delegado Macrolote 26', email: 'ml26@vvm.cl' },
+  ML27: { cargo: 'Delegado Macrolote 27', email: 'ml27@vvm.cl' }
+};
+
+function showMacrolote(val) {
+  var result = document.getElementById('macroloteResult');
+  if (!val || !MACROLOTE_DATA[val]) { result.classList.remove('visible'); return; }
+  var d = MACROLOTE_DATA[val];
+  document.getElementById('macroloteCargo').textContent = d.cargo;
+  var link = document.getElementById('macroloteEmail');
+  link.textContent = d.email;
+  link.href = 'mailto:' + d.email;
+  result.classList.add('visible');
+}
+
+function toggleFAQ(i) {
+  var item = document.getElementById('faq-' + i);
+  if (!item) return;
+  var open = item.classList.contains('open');
+  // Cerrar todos
+  document.querySelectorAll('.faq-item.open').forEach(function(el) {
+    el.classList.remove('open');
+    el.querySelector('.faq-btn').setAttribute('aria-expanded', 'false');
+  });
+  // Abrir el clickeado si estaba cerrado
+  if (!open) {
+    item.classList.add('open');
+    item.querySelector('.faq-btn').setAttribute('aria-expanded', 'true');
+  }
+}
+
+// ── Datos de ejemplo (respaldo si no hay Sheets configurado) ──
+var DEMO_UPDATES = [
+  { label: 'Septiembre 2026', items: [
+    { titulo: 'Corte de agua programado — Sector Norte, Etapa 1', texto: 'El miércoles 11 de septiembre entre las 09:00 y las 15:00 hrs se realizará mantención de la red de distribución. Afecta macrolotes 3 al 9. Se recomienda almacenar agua con anticipación.', fecha: '10 sep 2026', comite: 'Comité General' },
+    { titulo: 'Guardias reforzados fin de semana largo', texto: 'Durante el fin de semana del 18 al 20 de septiembre se duplicará el personal de vigilancia en los accesos. Se solicita tener credencial a mano al ingresar.', fecha: '8 sep 2026', comite: 'Comité Seguridad' },
+    { titulo: 'Cierre temporal camino interior Etapa 2', texto: 'Por inicio de trabajos de pavimentación, el camino interior sur de Etapa 2 estará cerrado del lunes 15 al viernes 19. Usar desvío señalizado por calle poniente.', fecha: '6 sep 2026', comite: 'Comité Obras' }
+  ]},
+  { label: 'Agosto 2026', items: [
+    { titulo: 'Actualización de credenciales de acceso vehicular', texto: 'A partir del 1 de septiembre rigen las nuevas credenciales. Actualizar en portería con cédula e identidad y escritura. Horario: lunes a viernes 09:00–13:00 hrs.', fecha: '18 ago 2026', comite: 'Comité General' },
+    { titulo: 'Inicio trabajos iluminación LED — sectores nocturnos', texto: 'Desde el 20 de agosto comienzan la instalación de 48 luminarias LED en Etapas 1 y 2. Habrá desvíos temporales según avance.', fecha: '15 ago 2026', comite: 'Comité Obras' }
+  ]}
+];
+var DEMO_NOTICIAS = [
+  { label: 'Septiembre 2026', items: [
+    { titulo: 'Asamblea general ordinaria — 28 de septiembre 2026', cuerpo: 'Se convoca a todos los propietarios. Orden del día: presupuesto 2027, elección directiva Etapa 2, informe de obras. Sede comunitaria · 10:00 hrs.', fecha: '5 sep 2026', tipo: 'featured' },
+    { titulo: 'Nuevo sistema de pago de gastos comunes en línea', cuerpo: 'A partir de octubre los gastos comunes podrán pagarse por transferencia o portal web. Se eliminan los pagos en efectivo presenciales.', fecha: '2 sep 2026', tipo: 'important' }
+  ]},
+  { label: 'Agosto 2026', items: [
+    { titulo: 'Aprobación presupuesto extraordinario — mejoras camino acceso', cuerpo: 'La asamblea del 12 de agosto aprobó $28.000.000 para la repavimentación del camino principal de Etapa 1. Trabajos comienzan en septiembre.', fecha: '13 ago 2026', tipo: 'featured' },
+    { titulo: 'Campaña de limpieza de senderos — septiembre 2026', cuerpo: 'El comité general organiza una jornada de limpieza de los senderos peatonales para el sábado 20 de septiembre. ¡Todos invitados!', fecha: '8 ago 2026', tipo: '' }
+  ]}
+];
+
+var DEMO_FAQ = [
+  { pregunta: '¿Cuándo vence el pago de los gastos comunes?', respuesta: 'Los gastos comunes vencen el día 15 de cada mes. Pasada esa fecha se aplica un recargo según lo establecido en el reglamento interno.' },
+  { pregunta: '¿Cómo pago los gastos comunes?', respuesta: 'Por transferencia bancaria a <strong>Comunidad VVM · Banco Estado</strong>, cuenta corriente 00-123456-78, RUT 65.432.100-9. En el asunto indica tu número de parcela.' },
+  { pregunta: '¿Qué hago si hay un problema de seguridad urgente?', respuesta: 'Contacta directamente a la garita de acceso o llama al número de emergencias de la comunidad disponible en portería. Para situaciones graves llama al 133 (Carabineros) o al 132 (Bomberos).' },
+  { pregunta: '¿Puedo hacer obras en mi parcela sin avisar?', respuesta: 'No. Toda obra que modifique el exterior de la parcela o afecte áreas comunes debe ser informada y aprobada por el comité correspondiente antes de comenzar. Consulta el reglamento interno.' },
+  { pregunta: '¿Cómo me entero de las asambleas?', respuesta: 'Las asambleas son convocadas con al menos 15 días de anticipación a través del canal de WhatsApp de la comunidad y publicadas en este portal en la sección Noticias Importantes.' },
+  { pregunta: '¿Qué es el Comité General y para qué sirve?', respuesta: 'El Comité General está formado por los presidentes de cada comité de etapa. Toma decisiones que afectan a toda la comunidad: contratación de servicios, obras mayores, presupuesto anual y resolución de conflictos entre etapas.' },
+  { pregunta: '¿Puedo tener mascotas en mi parcela?', respuesta: 'Sí, siempre que no causen molestias a los vecinos ni se suelten en zonas comunes. Las mascotas en caminos y áreas comunes deben ir con correa. El comité puede mediar en casos de conflicto.' },
+  { pregunta: '¿Cómo postulo a ser parte de un comité?', respuesta: 'Las elecciones de directiva se realizan en asambleas ordinarias. Cualquier propietario al día en sus pagos puede postularse. Comunícate con la secretaría de tu etapa para informarte del calendario electoral.' },
+  { pregunta: '¿Dónde puedo ver los estados financieros de la comunidad?', respuesta: 'Los estados financieros anuales auditados se publican en la sección Documentos de este portal después de cada asamblea ordinaria. También puedes solicitarlos por correo a tesoreria@vvm.cl.' },
+  { pregunta: '¿Qué pasa si no pago los gastos comunes por varios meses?', respuesta: 'La deuda acumula recargos y puede derivar en acciones de cobranza extrajudicial o judicial según lo estipulado en el reglamento. Si tienes dificultades de pago, contacta a la tesorería para buscar un acuerdo.' }
+];
+
+// ── Inicialización principal ──
+(function() {
+  var usingSheets = VVM_SHEET_ID !== 'TU_SHEET_ID_AQUI' && VVM_SHEET_ID.length > 10;
+
+  if (!usingSheets) {
+    buildCarousel({ trackId:'updTrack', labelId:'updLabel', prevId:'updPrev', nextId:'updNext', selId:'updSelect', meses: DEMO_UPDATES, renderSlide: renderUpdatesSlide });
+    buildCarousel({ trackId:'carTrack', labelId:'carLabel', prevId:'carPrev', nextId:'carNext', selId:'carSelect', meses: DEMO_NOTICIAS, renderSlide: renderNoticiasSlide });
+    renderFAQ(DEMO_FAQ);
+    return;
+  }
+
+  setLoading('updTrack', 'Cargando updates…');
+  setLoading('carTrack', 'Cargando noticias…');
+
+  Promise.all([fetchTab('Updates'), fetchTab('Noticias'), fetchTab('FAQ')])
+    .then(function(results) {
+      var updRows = results[0], notRows = results[1], faqRows = results[2];
+
+      var updMeses = updRows.length ? groupByMonth(updRows) : DEMO_UPDATES;
+      var notMeses = notRows.length ? groupByMonth(notRows) : DEMO_NOTICIAS;
+
+      document.getElementById('updTrack').innerHTML = '';
+      document.getElementById('carTrack').innerHTML = '';
+
+      buildCarousel({ trackId:'updTrack', labelId:'updLabel', prevId:'updPrev', nextId:'updNext', selId:'updSelect', meses: updMeses, renderSlide: renderUpdatesSlide });
+      buildCarousel({ trackId:'carTrack', labelId:'carLabel', prevId:'carPrev', nextId:'carNext', selId:'carSelect', meses: notMeses, renderSlide: renderNoticiasSlide });
+      renderFAQ(faqRows.length ? faqRows : DEMO_FAQ);
+    })
+    .catch(function(err) {
+      console.warn('Sheets error:', err);
+      document.getElementById('updTrack').innerHTML = '';
+      document.getElementById('carTrack').innerHTML = '';
+      buildCarousel({ trackId:'updTrack', labelId:'updLabel', prevId:'updPrev', nextId:'updNext', selId:'updSelect', meses: DEMO_UPDATES, renderSlide: renderUpdatesSlide });
+      buildCarousel({ trackId:'carTrack', labelId:'carLabel', prevId:'carPrev', nextId:'carNext', selId:'carSelect', meses: DEMO_NOTICIAS, renderSlide: renderNoticiasSlide });
+      renderFAQ(DEMO_FAQ);
+    });
+})();
+
+// ── Accesibilidad: tema y tamaño de texto ──
+(function() {
+  const root = document.documentElement;
+  const themeToggle = document.getElementById('themeToggle');
+  const themeIcon   = document.getElementById('themeIcon');
+  const themeLabel  = document.getElementById('themeLabel');
+  const fontUp      = document.getElementById('fontUp');
+  const fontDown    = document.getElementById('fontDown');
+
+  const SIZES = [14, 16, 18, 21, 24];
+  let sizeIdx = 1; // default: 16px
+  let dark = false;
+
+  // Restore from localStorage
+  try {
+    const saved = localStorage.getItem('vvm-size');
+    if (saved !== null) sizeIdx = Math.max(0, Math.min(SIZES.length - 1, parseInt(saved)));
+    dark = localStorage.getItem('vvm-dark') === 'true';
+  } catch(e) {}
+
+  function applySize() {
+    root.style.fontSize = SIZES[sizeIdx] + 'px';
+    fontDown.disabled = sizeIdx === 0;
+    fontUp.disabled   = sizeIdx === SIZES.length - 1;
+    fontDown.style.opacity = sizeIdx === 0 ? '0.35' : '1';
+    fontUp.style.opacity   = sizeIdx === SIZES.length - 1 ? '0.35' : '1';
+    try { localStorage.setItem('vvm-size', sizeIdx); } catch(e) {}
+  }
+
+  function applyTheme() {
+    if (dark) {
+      root.setAttribute('data-theme', 'dark');
+      themeIcon.textContent  = '☀️';
+      themeLabel.textContent = 'Claro';
+    } else {
+      root.removeAttribute('data-theme');
+      themeIcon.textContent  = '🌙';
+      themeLabel.textContent = 'Oscuro';
+    }
+    try { localStorage.setItem('vvm-dark', dark); } catch(e) {}
+  }
+
+  fontUp.addEventListener('click', () => {
+    if (sizeIdx < SIZES.length - 1) { sizeIdx++; applySize(); }
+  });
+
+  fontDown.addEventListener('click', () => {
+    if (sizeIdx > 0) { sizeIdx--; applySize(); }
+  });
+
+  themeToggle.addEventListener('click', () => {
+    dark = !dark;
+    applyTheme();
+  });
+
+  applySize();
+  applyTheme();
+})();
+</script>
