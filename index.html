@@ -1244,6 +1244,12 @@ footer {
 section[id] { scroll-margin-top: 104px; }
 @media (max-width: 900px) { section[id] { scroll-margin-top: 68px; } }
 
+.nav-sub .nav-links a.nav-alert { color: var(--urgent); font-weight: 700; gap: 6px; }
+.nav-alert-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--urgent); animation: blink 1.8s ease-in-out infinite; }
+.persona-list { display: flex; flex-wrap: wrap; gap: 18px; margin-bottom: 10px; }
+.faq-body p + p, .faq-body ul + p, .faq-body ol + p, .faq-body div + p { margin-top: 8px; }
+.faq-body .plano-box { min-height: 140px; }
+
 /* Sello "Actualizado" junto al título de sección */
 .section-updated {
   font-size: 0.7rem;
@@ -1629,6 +1635,7 @@ section[id] { scroll-margin-top: 104px; }
   </div>
   <div class="nav-sub">
     <ul class="nav-links">
+      <li><a href="#urgente" class="nav-alert"><span class="nav-alert-dot"></span>Update</a></li>
       <li><a href="#inicio">Inicio</a></li>
       <li><a href="#valle">Nuestro Valle</a></li>
       <li><a href="#gastos">Gastos Comunes</a></li>
@@ -1644,6 +1651,7 @@ section[id] { scroll-margin-top: 104px; }
 
 <!-- MENÚ MÓVIL -->
 <div class="mobile-menu" id="mobileMenu" role="dialog" aria-label="Menú de navegación">
+  <a href="#urgente" onclick="closeMobileMenu()" style="color:var(--urgent);font-weight:700">🚨 Update</a>
   <a href="#inicio" onclick="closeMobileMenu()">🏠 Inicio</a>
   <a href="#valle" onclick="closeMobileMenu()">🌿 Nuestro Valle</a>
   <a href="#gastos" onclick="closeMobileMenu()">💰 Gastos Comunes</a>
@@ -1670,6 +1678,22 @@ section[id] { scroll-margin-top: 104px; }
 </div>
 
 <main class="main">
+  <!-- UPDATE DIARIO -->
+  <section id="urgente">
+    <div class="section-header">
+      <div class="section-accent"></div>
+      <h2 class="section-title">🚨 Update</h2>
+      <div class="section-rule"></div>
+    </div>
+    <div class="carousel-header">
+      <button class="car-nav-btn" id="updPrev" aria-label="Mes anterior">‹</button>
+      <span class="car-month-label" id="updLabel"></span>
+      <button class="car-nav-btn" id="updNext" aria-label="Mes siguiente">›</button>
+      <select class="car-select" id="updSelect" aria-label="Seleccionar mes"></select>
+    </div>
+    <div class="carousel-track" id="updTrack"></div>
+  </section>
+
   <!-- INICIO: buscador, accesos rápidos y agenda -->
   <section id="inicio">
     <div class="section-header">
@@ -1725,21 +1749,6 @@ section[id] { scroll-margin-top: 104px; }
     </div>
   </section>
 
-  <!-- UPDATE DIARIO -->
-  <section id="urgente">
-    <div class="section-header">
-      <div class="section-accent"></div>
-      <h2 class="section-title">🚨 Update</h2>
-      <div class="section-rule"></div>
-    </div>
-    <div class="carousel-header">
-      <button class="car-nav-btn" id="updPrev" aria-label="Mes anterior">‹</button>
-      <span class="car-month-label" id="updLabel"></span>
-      <button class="car-nav-btn" id="updNext" aria-label="Mes siguiente">›</button>
-      <select class="car-select" id="updSelect" aria-label="Seleccionar mes"></select>
-    </div>
-    <div class="carousel-track" id="updTrack"></div>
-  </section>
 
   <!-- NOTICIAS -->
   <section id="noticias">
@@ -1775,83 +1784,27 @@ section[id] { scroll-margin-top: 104px; }
   <section id="valle">
     <div class="section-header">
       <div class="section-accent"></div>
-      <h2 class="section-title">🌿 Nuestro Valle</h2>
+      <h2 class="section-title">Nuestro Valle</h2>
       <div class="section-rule"></div>
     </div>
-    <p class="section-lead" data-s="Historia de Valle Verde Mar">Valle Verde Mar es una comunidad rural de más de 1.500 parcelas, organizada por sus propios vecinos. Nació como un loteo de macrolotes que con los años fue sumando etapas, caminos y servicios comunes. Aquí encontrarás, en simple, cómo está formado y cómo se organiza.</p>
-
-    <p class="sub-title">El Valle en simple</p>
-    <div class="info-grid">
-        <div class="gasto-block" data-s="Historia del Valle">
-          <span class="card-icon" aria-hidden="true">📜</span>
-          <span class="gasto-block-title">Historia</span>
-          <p>Breve reseña de cómo nació Valle Verde Mar y cómo ha crecido. <strong>Texto por completar por el Comité.</strong></p>
-        </div>
-        <div class="gasto-block" data-s="Carácter rural">
-          <span class="card-icon" aria-hidden="true">🌾</span>
-          <span class="gasto-block-title">Carácter rural</span>
-          <p>Somos un sector rural: caminos de tierra y maicillo, naturaleza y parcelas amplias. Eso implica cuidar juntos los caminos, el agua y la prevención de incendios.</p>
-        </div>
-        <div class="gasto-block" data-s="Tamaño y desarrollo del Valle">
-          <span class="card-icon" aria-hidden="true">📐</span>
-          <span class="gasto-block-title">Tamaño</span>
-          <p><strong>1.500+</strong> parcelas · <strong>27</strong> macrolotes · <strong>4</strong> etapas.</p>
-        </div>
-    </div>
-
-    <p class="sub-title">Etapas y macrolotes</p>
-    <div class="info-grid">
-        <div class="gasto-block" data-s="Qué es una Etapa">
-          <span class="card-icon" aria-hidden="true">🧩</span>
-          <span class="gasto-block-title">¿Qué es una Etapa?</span>
-          <p>Es un sector del Valle que agrupa varios macrolotes. Cada Etapa tiene su propia directiva, elegida por sus propietarios.</p>
-        </div>
-        <div class="gasto-block" data-s="Qué es un macrolote">
-          <span class="card-icon" aria-hidden="true">🏡</span>
-          <span class="gasto-block-title">¿Qué es un macrolote?</span>
-          <p>Es un terreno mayor que se subdividió en parcelas. Cada macrolote puede tener su propia directiva y gastos internos.</p>
-        </div>
-        <div class="gasto-block" data-s="Relación entre Etapas y Comité General">
-          <span class="card-icon" aria-hidden="true">🔗</span>
-          <span class="gasto-block-title">¿Cómo se relacionan?</span>
-          <p>Las directivas de Etapa forman el <strong>Comité General</strong>, que ve los temas de todo el Valle: caminos principales, accesos, seguridad y presupuesto común.</p>
-        </div>
-    </div>
-
-    <p class="sub-title">Equipo de conserjería</p>
-    <div class="info-grid">
-        <div class="gasto-block" data-s="Conserje turno día">
-          <div class="persona"><div class="persona-foto" aria-hidden="true">C1</div><div><p class="persona-nombre">Nombre Conserje</p><p class="persona-rol">Turno día</p></div></div>
-        </div>
-        <div class="gasto-block" data-s="Conserje turno noche">
-          <div class="persona"><div class="persona-foto" aria-hidden="true">C2</div><div><p class="persona-nombre">Nombre Conserje</p><p class="persona-rol">Turno noche</p></div></div>
-        </div>
-        <div class="gasto-block" data-s="Funciones y responsabilidades de conserjes">
-          <span class="gasto-block-title">Funciones de conserjería</span>
-          <ul><li>Controlar el ingreso de visitas, trabajadores y vehículos.</li><li>Registrar novedades y avisar al Comité.</li><li>Orientar a vecinos y visitas.</li><li>Dar aviso ante emergencias.</li></ul>
-        </div>
-    </div>
-
-    <p class="sub-title" id="plano">Plano y territorio</p>
-    <div class="plano-box" data-s="Plano del Valle">
-      <div><strong>Plano general del Valle</strong>Aquí irá el plano ampliable (imagen o PDF) con etapas, macrolotes y caminos.</div>
-    </div>
-    <div class="legend" aria-label="Tipos de caminos y terrenos">
-      <span><i class="l-propio"></i>Camino o terreno del Valle</span>
-      <span><i class="l-privado"></i>Terreno privado (no es del Valle)</span>
-      <span><i class="l-serv"></i>Servidumbre (ej. Lincoyan, Sonacol)</span>
-    </div>
-    <div class="info-grid" style="margin-top:14px">
-        <div class="gasto-block" data-s="Límites de Valle Verde Mar">
-          <span class="card-icon" aria-hidden="true">📍</span>
-          <span class="gasto-block-title">Límites del Valle</span>
-          <p>Descripción general de dónde empieza y termina Valle Verde Mar, y qué sectores cercanos <strong>no</strong> pertenecen a la comunidad.</p>
-        </div>
-        <div class="gasto-block" data-s="Servidumbres Lincoyan Sonacol">
-          <span class="card-icon" aria-hidden="true">↔️</span>
-          <span class="gasto-block-title">¿Qué es una servidumbre?</span>
-          <p>Es un derecho de paso o de uso sobre un terreno que pertenece a otro. Por ejemplo, las franjas de Lincoyan o Sonacol: se pueden usar según lo acordado, pero no son del Valle.</p>
-        </div>
+    <p class="section-lead">Comunidad rural de <strong>1.500+ parcelas</strong>, <strong>27 macrolotes</strong> y <strong>4 etapas</strong>, organizada por sus propios vecinos.</p>
+    <div class="faq-list">
+      <div class="faq-item" data-s="Historia y carácter rural" data-k="historia tamaño desarrollo rural">
+        <button class="faq-btn" onclick="toggleItem(this)" aria-expanded="false"><span>Historia y carácter rural</span><span class="faq-icon" aria-hidden="true">+</span></button>
+        <div class="faq-body"><p>Valle Verde Mar nació como un loteo de macrolotes que con los años sumó etapas, caminos y servicios comunes. <strong>Reseña por completar por el Comité.</strong></p><p>Somos un sector rural: caminos de maicillo, naturaleza y parcelas amplias. Por eso cuidamos juntos los caminos, el agua y la prevención de incendios.</p></div>
+      </div>
+      <div class="faq-item" data-s="Etapas y macrolotes" data-k="etapa macrolote comite general organizacion">
+        <button class="faq-btn" onclick="toggleItem(this)" aria-expanded="false"><span>Etapas y macrolotes</span><span class="faq-icon" aria-hidden="true">+</span></button>
+        <div class="faq-body"><ul><li><strong>Etapa:</strong> sector del Valle que agrupa varios macrolotes, con su propia directiva.</li><li><strong>Macrolote:</strong> terreno mayor subdividido en parcelas; puede tener directiva y gastos internos.</li><li>Las directivas de Etapa forman el <strong>Comité General</strong>, que ve lo común: caminos principales, accesos, seguridad y presupuesto.</li></ul></div>
+      </div>
+      <div class="faq-item" data-s="Equipo de conserjería" data-k="conserje conserjes porteria funciones">
+        <button class="faq-btn" onclick="toggleItem(this)" aria-expanded="false"><span>Equipo de conserjería</span><span class="faq-icon" aria-hidden="true">+</span></button>
+        <div class="faq-body"><div class="persona-list"><div class="persona"><div class="persona-foto" aria-hidden="true">C1</div><div><p class="persona-nombre">Nombre Conserje</p><p class="persona-rol">Turno día</p></div></div><div class="persona"><div class="persona-foto" aria-hidden="true">C2</div><div><p class="persona-nombre">Nombre Conserje</p><p class="persona-rol">Turno noche</p></div></div></div><p><strong>Funciones:</strong> controlar ingresos de visitas, trabajadores y vehículos; registrar novedades; orientar a vecinos; avisar ante emergencias.</p></div>
+      </div>
+      <div class="faq-item" id="plano" data-s="Plano y territorio" data-k="plano limites territorio servidumbre lincoyan sonacol mapa">
+        <button class="faq-btn" onclick="toggleItem(this)" aria-expanded="false"><span>Plano y territorio</span><span class="faq-icon" aria-hidden="true">+</span></button>
+        <div class="faq-body"><div class="plano-box"><div><strong>Plano general del Valle</strong>Aquí irá el plano ampliable con etapas, macrolotes y caminos.</div></div><div class="legend"><span><i class="l-propio"></i>Del Valle</span><span><i class="l-privado"></i>Privado</span><span><i class="l-serv"></i>Servidumbre</span></div><p style="margin-top:10px">No todos los caminos que usamos son del Valle. Una <strong>servidumbre</strong> es un derecho de paso sobre un terreno de otro dueño (ej. Lincoyan, Sonacol).</p></div>
+      </div>
     </div>
   </section>
 
@@ -2000,96 +1953,28 @@ section[id] { scroll-margin-top: 104px; }
   <section id="infraestructura">
     <div class="section-header">
       <div class="section-accent"></div>
-      <h2 class="section-title">🛣️ Infraestructura</h2>
+      <h2 class="section-title">Infraestructura</h2>
       <div class="section-rule"></div>
       <span class="section-updated">Actualizado sep 2026</span>
     </div>
-    <p class="sub-title">Caminos · así se hace una mantención</p>
-    <div class="steps">
-        <div class="step" data-s="Motoniveladora" data-k="maquinaria caminos camion">
-          <div class="step-num">1</div>
-          <p class="step-title">Motoniveladora</p>
-          <p class="step-text">Empareja y da forma al camino, recupera la pendiente para que escurra el agua.</p>
-        </div>
-        <div class="step" data-s="Camión aljibe" data-k="maquinaria caminos camion">
-          <div class="step-num">2</div>
-          <p class="step-title">Camión aljibe</p>
-          <p class="step-text">Humedece el material para que se compacte bien y no se levante polvo.</p>
-        </div>
-        <div class="step" data-s="Rodillo" data-k="maquinaria caminos camion">
-          <div class="step-num">3</div>
-          <p class="step-title">Rodillo</p>
-          <p class="step-text">Compacta el maicillo para dejar una superficie firme y duradera.</p>
-        </div>
-        <div class="step" data-s="Excavadora" data-k="maquinaria caminos camion">
-          <div class="step-num">4</div>
-          <p class="step-title">Excavadora</p>
-          <p class="step-text">Limpia zanjas, ductos y remueve material en zonas dañadas.</p>
-        </div>
-        <div class="step" data-s="Camión tolva" data-k="maquinaria caminos camion">
-          <div class="step-num">5</div>
-          <p class="step-title">Camión tolva</p>
-          <p class="step-text">Trae el maicillo o material desde la cantera hasta el camino.</p>
-        </div>
+    <div class="faq-list">
+      <div class="faq-item" data-s="Caminos: cómo se mantienen" data-k="caminos maquinaria camion motoniveladora aljibe rodillo excavadora tolva maicillo prioridad">
+        <button class="faq-btn" onclick="toggleItem(this)" aria-expanded="false"><span>Caminos: cómo se mantienen</span><span class="faq-icon" aria-hidden="true">+</span></button>
+        <div class="faq-body"><ol><li><strong>Camión tolva:</strong> trae el maicillo desde la cantera.</li><li><strong>Motoniveladora:</strong> empareja y recupera la pendiente para que escurra el agua.</li><li><strong>Camión aljibe:</strong> humedece el material para compactarlo.</li><li><strong>Rodillo:</strong> compacta y deja la superficie firme.</li><li><strong>Excavadora:</strong> limpia zanjas y ductos cuando hace falta.</li></ol><p><strong>¿Por qué maicillo?</strong> Compacta bien, drena y es más económico que pavimentar.</p><p><strong>Prioridad:</strong> seguridad, caminos más usados, daños que empeoran con lluvia y presupuesto disponible.</p></div>
+      </div>
+      <div class="faq-item" data-s="Material y contratista cerca" data-k="material cantera contratista lejos cerca costos">
+        <button class="faq-btn" onclick="toggleItem(this)" aria-expanded="false"><span>Material y contratista cerca</span><span class="faq-icon" aria-hidden="true">+</span></button>
+        <div class="faq-body"><p>Tener maicillo y contratista cerca del Valle significa <strong>menos costo de traslado, respuesta más rápida y más mantenciones al año</strong>.</p><p>Si hay que traerlos de lejos, cada mantención cuesta más, tarda más y alcanza para menos.</p></div>
+      </div>
+      <div class="faq-item" data-s="Ductos y aguas lluvias" data-k="ductos zanjas agua lluvia">
+        <button class="faq-btn" onclick="toggleItem(this)" aria-expanded="false"><span>Ductos y aguas lluvias</span><span class="faq-icon" aria-hidden="true">+</span></button>
+        <div class="faq-body"><p>El agua es el principal enemigo de un camino de tierra. Si un ducto se tapa, el agua corre por el camino y lo destruye.</p><ul><li>No tapes zanjas ni ductos frente a tu parcela.</li><li>No botes ramas ni escombros en ellos.</li><li>Avisa si ves uno obstruido.</li></ul></div>
+      </div>
+      <div class="faq-item" data-s="Basura y bateas" data-k="basura bateas residuos retiro horario terreno arrendado">
+        <button class="faq-btn" onclick="toggleItem(this)" aria-expanded="false"><span>Basura y bateas</span><span class="faq-icon" aria-hidden="true">+</span></button>
+        <div class="faq-body"><p><strong>Dónde:</strong> sector oficina/container (terreno arrendado, no es del Valle). <strong>Horario y retiro:</strong> por confirmar.</p><p><strong>Sí:</strong> basura domiciliaria en bolsas cerradas.<br><strong>No:</strong> escombros, ramas, muebles, electrodomésticos, neumáticos ni residuos peligrosos.</p></div>
+      </div>
     </div>
-    <div class="info-grid" style="margin-top:12px">
-        <div class="gasto-block" data-s="Por qué se usa maicillo">
-          <span class="card-icon" aria-hidden="true">🪨</span>
-          <span class="gasto-block-title">¿Por qué maicillo?</span>
-          <p>Es un material granular que compacta bien, drena el agua y es más económico que pavimentar. Tenerlo disponible es clave para reparar a tiempo.</p>
-        </div>
-        <div class="gasto-block" data-s="Cómo se priorizan las mantenciones de caminos">
-          <span class="card-icon" aria-hidden="true">📋</span>
-          <span class="gasto-block-title">¿Cómo se prioriza?</span>
-          <ul><li>Seguridad: tramos peligrosos primero.</li><li>Caminos más usados o de acceso principal.</li><li>Daños que empeoran con lluvia.</li><li>Presupuesto disponible.</li></ul>
-        </div>
-    </div>
-
-    <p class="sub-title">Material y contratista cerca del Valle</p>
-    <div class="info-grid">
-        <div class="gasto-block" data-s="Beneficio de tener material y contratista cerca">
-          <span class="card-icon" aria-hidden="true">✅</span>
-          <span class="gasto-block-title">Si están cerca</span>
-          <ul class="si"><li>Menores tiempos y costos de traslado.</li><li>Respuesta rápida ante deterioros.</li><li>Mantenciones más frecuentes con el mismo presupuesto.</li></ul>
-        </div>
-        <div class="gasto-block" data-s="Qué pasa si el material se trae de lejos">
-          <span class="card-icon" aria-hidden="true">⚠️</span>
-          <span class="gasto-block-title">Si hay que traerlos de lejos</span>
-          <ul class="no"><li>Cada viaje cuesta más y tarda más.</li><li>La maquinaria debe trasladarse desde lejos.</li><li>Menos mantenciones al año con el mismo dinero.</li></ul>
-        </div>
-    </div>
-
-    <p class="sub-title">Ductos y aguas lluvias</p>
-    <div class="info-grid">
-        <div class="gasto-block" data-s="Ductos y evacuación de aguas lluvias">
-          <span class="card-icon" aria-hidden="true">💧</span>
-          <span class="gasto-block-title">Por qué importan</span>
-          <p>El agua es el principal enemigo de un camino de tierra. Si los ductos y zanjas se tapan, el agua corre por el camino y lo destruye.</p>
-        </div>
-        <div class="gasto-block" data-s="Responsabilidades de mantención de ductos">
-          <span class="card-icon" aria-hidden="true">🙋</span>
-          <span class="gasto-block-title">Qué puedes hacer tú</span>
-          <ul><li>No tapar zanjas ni ductos frente a tu parcela.</li><li>No botar ramas ni escombros en ellos.</li><li>Avisar si ves uno obstruido.</li></ul>
-        </div>
-    </div>
-
-    <p class="sub-title">Basura e instalaciones</p>
-    <div class="info-grid">
-        <div class="gasto-block" data-s="Ubicación horario y retiro de bateas de basura">
-          <span class="card-icon" aria-hidden="true">🗑️</span>
-          <span class="gasto-block-title">Bateas de basura</span>
-          <p><strong>Ubicación:</strong> sector de oficina/container (ver plano).<br><strong>Horario:</strong> por confirmar.<br><strong>Retiro:</strong> empresa contratada, frecuencia por confirmar.</p>
-        </div>
-        <div class="gasto-block" data-s="Qué residuos se pueden depositar">
-          <span class="gasto-block-title">Sí se puede</span>
-          <ul class="si"><li>Basura domiciliaria en bolsas cerradas.</li><li>Reciclables limpios (si hay contenedor).</li></ul>
-        </div>
-        <div class="gasto-block" data-s="Qué residuos no se pueden depositar">
-          <span class="gasto-block-title">No se puede</span>
-          <ul class="no"><li>Escombros y restos de construcción.</li><li>Ramas y poda.</li><li>Muebles, electrodomésticos, neumáticos.</li><li>Residuos peligrosos (aceites, baterías).</li></ul>
-        </div>
-    </div>
-    <div class="nota" data-s="Terreno arrendado bateas oficina">El terreno donde están la <strong>oficina/container y las bateas es arrendado</strong>; no es propiedad del Valle. Se eligió por su ubicación de fácil acceso para el camión recolector.</div>
   </section>
 
   <!-- PROYECTOS -->
@@ -2139,63 +2024,35 @@ section[id] { scroll-margin-top: 104px; }
   <section id="seguridad">
     <div class="section-header">
       <div class="section-accent"></div>
-      <h2 class="section-title">🧯 Seguridad y Emergencias</h2>
+      <h2 class="section-title">Seguridad y Emergencias</h2>
       <div class="section-rule"></div>
       <span class="section-updated">Actualizado sep 2026</span>
     </div>
-    <p class="sub-title">Números de emergencia</p>
     <div class="emerg-grid">
-      <div class="emerg-card" data-s="Bomberos 132 incendio"><span class="emerg-num">132</span><span class="emerg-label">Bomberos</span></div>
-      <div class="emerg-card" data-s="CONAF 130 incendio forestal"><span class="emerg-num">130</span><span class="emerg-label">CONAF · incendio forestal</span></div>
-      <div class="emerg-card" data-s="Ambulancia SAMU 131"><span class="emerg-num">131</span><span class="emerg-label">Ambulancia (SAMU)</span></div>
+      <div class="emerg-card" data-s="Bomberos 132" data-k="incendio"><span class="emerg-num">132</span><span class="emerg-label">Bomberos</span></div>
+      <div class="emerg-card" data-s="CONAF 130" data-k="incendio forestal"><span class="emerg-num">130</span><span class="emerg-label">CONAF</span></div>
+      <div class="emerg-card" data-s="Ambulancia SAMU 131"><span class="emerg-num">131</span><span class="emerg-label">Ambulancia</span></div>
       <div class="emerg-card" data-s="Carabineros 133"><span class="emerg-num">133</span><span class="emerg-label">Carabineros</span></div>
-      <div class="emerg-card" data-s="Portería teléfono"><span class="emerg-num small">+56 9 8276 0850</span><span class="emerg-label">Portería Valle Verde Mar</span></div>
+      <div class="emerg-card" data-s="Portería" data-k="telefono"><span class="emerg-num small">+56 9 8276 0850</span><span class="emerg-label">Portería</span></div>
     </div>
-
-    <p class="sub-title">Ante un incendio</p>
-    <div class="steps">
-      <div class="step" data-s="Qué hacer ante un incendio"><div class="step-num">1</div><p class="step-title">Llama</p><p class="step-text">Al 132 o 130, y luego a portería. Indica sector y macrolote.</p></div>
-      <div class="step"><div class="step-num">2</div><p class="step-title">Aléjate</p><p class="step-text">No intentes apagar un fuego grande. Protege primero a las personas.</p></div>
-      <div class="step"><div class="step-num">3</div><p class="step-title">Evacúa</p><p class="step-text">Sigue la ruta de evacuación y las indicaciones de la Brigada.</p></div>
-      <div class="step"><div class="step-num">4</div><p class="step-title">Deja pasar</p><p class="step-text">Mantén los caminos libres para bomberos y brigadistas.</p></div>
-    </div>
-
-    <p class="sub-title">Brigada de Emergencias</p>
-    <div class="info-grid">
-        <div class="gasto-block" data-s="Qué es la Brigada de Emergencias">
-          <span class="card-icon" aria-hidden="true">🦺</span>
-          <span class="gasto-block-title">Quiénes son</span>
-          <p>Vecinos voluntarios capacitados para dar la primera respuesta ante incendios y emergencias dentro del Valle, mientras llegan los servicios oficiales.</p>
-        </div>
-        <div class="gasto-block" data-s="Cómo contactar a la Brigada">
-          <span class="card-icon" aria-hidden="true">📣</span>
-          <span class="gasto-block-title">Cómo contactarlos</span>
-          <p>Correo: <strong>brigada@vvm.cl</strong><br>En emergencia, llama primero al 132 y luego a portería.</p>
-        </div>
-        <div class="gasto-block" data-s="Cómo colaborar o participar de la Brigada">
-          <span class="card-icon" aria-hidden="true">🤝</span>
-          <span class="gasto-block-title">Cómo participar</span>
-          <p>Escribe a la Brigada. Se realizan capacitaciones y campañas de prevención durante el año, publicadas en <a href="#noticias" style="color:var(--brand)">Actualidad</a>.</p>
-        </div>
-    </div>
-
-    <p class="sub-title">Prevención y seguridad</p>
-    <div class="info-grid">
-        <div class="gasto-block" data-s="Recomendaciones de prevención de incendios">
-          <span class="card-icon" aria-hidden="true">🔥</span>
-          <span class="gasto-block-title">Prevención de incendios</span>
-          <ul><li>Mantén tu parcela limpia de pastizales secos.</li><li>No hagas quemas.</li><li>Ten agua y manguera disponibles.</li></ul>
-        </div>
-        <div class="gasto-block" data-s="Medidas preventivas de seguridad del Valle">
-          <span class="card-icon" aria-hidden="true">🔒</span>
-          <span class="gasto-block-title">Recomendaciones de seguridad</span>
-          <ul><li>Autoriza tus visitas con anticipación.</li><li>No prestes tu control remoto.</li><li>Avisa a portería si ves algo inusual.</li></ul>
-        </div>
-        <div class="gasto-block" data-s="Plan de Emergencias evacuación señalética">
-          <span class="card-icon" aria-hidden="true">🗺️</span>
-          <span class="gasto-block-title">Plan de Emergencias</span>
-          <p>Rutas de evacuación, puntos de encuentro y señalética.</p><p><a href="#documentos" style="color:var(--brand);font-weight:600">Ver Plan de Emergencias →</a></p>
-        </div>
+    <div style="height:12px"></div>
+    <div class="faq-list">
+      <div class="faq-item" data-s="Qué hacer ante un incendio" data-k="incendio fuego evacuacion emergencia">
+        <button class="faq-btn" onclick="toggleItem(this)" aria-expanded="false"><span>Qué hacer ante un incendio</span><span class="faq-icon" aria-hidden="true">+</span></button>
+        <div class="faq-body"><ol><li><strong>Llama</strong> al 132 o 130, y luego a portería. Indica sector y macrolote.</li><li><strong>Aléjate:</strong> no intentes apagar un fuego grande.</li><li><strong>Evacúa</strong> por la ruta señalizada y sigue a la Brigada.</li><li><strong>Deja los caminos libres</strong> para bomberos.</li></ol></div>
+      </div>
+      <div class="faq-item" data-s="Brigada de Emergencias" data-k="brigada voluntarios capacitacion participar">
+        <button class="faq-btn" onclick="toggleItem(this)" aria-expanded="false"><span>Brigada de Emergencias</span><span class="faq-icon" aria-hidden="true">+</span></button>
+        <div class="faq-body"><p>Vecinos voluntarios capacitados para la primera respuesta mientras llegan los servicios oficiales.</p><p><strong>Contacto:</strong> brigada@vvm.cl · <strong>Participar:</strong> escríbeles; las capacitaciones se publican en Actualidad.</p></div>
+      </div>
+      <div class="faq-item" data-s="Prevención y seguridad" data-k="prevencion seguridad recomendaciones quemas">
+        <button class="faq-btn" onclick="toggleItem(this)" aria-expanded="false"><span>Prevención y seguridad</span><span class="faq-icon" aria-hidden="true">+</span></button>
+        <div class="faq-body"><ul><li>Mantén tu parcela libre de pastizales secos y no hagas quemas.</li><li>Autoriza tus visitas con anticipación y no prestes tu control remoto.</li><li>Avisa a portería si ves algo inusual.</li></ul></div>
+      </div>
+      <div class="faq-item" data-s="Plan de Emergencias" data-k="plan emergencias evacuacion senaletica">
+        <button class="faq-btn" onclick="toggleItem(this)" aria-expanded="false"><span>Plan de Emergencias</span><span class="faq-icon" aria-hidden="true">+</span></button>
+        <div class="faq-body"><p>Rutas de evacuación, puntos de encuentro y señalética. Descárgalo en <a href="#documentos">Documentos y Normas</a>.</p></div>
+      </div>
     </div>
   </section>
 
@@ -3040,7 +2897,8 @@ setupChips('docChips', function(f) {
       var sel = document.getElementById(track.id === 'updTrack' ? 'updSelect' : 'carSelect');
       if (sel) { sel.value = idx; sel.dispatchEvent(new Event('change')); }
     }
-    if (el.classList.contains('faq-item') && !el.classList.contains('open')) toggleItem(el.querySelector('.faq-btn'));
+    var acc = el.classList.contains('faq-item') ? el : el.closest('.faq-item');
+    if (acc && !acc.classList.contains('open')) toggleItem(acc.querySelector('.faq-btn'));
     el.scrollIntoView({ behavior: 'smooth', block: 'center' });
     el.classList.add('flash');
     setTimeout(function() { el.classList.remove('flash'); }, 1800);

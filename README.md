@@ -19,7 +19,7 @@ En `index.html`, busca `VVM_SHEET_ID` y pega el ID de tu planilla (debe estar co
 Si no hay planilla configurada, el sitio muestra los datos de ejemplo incluidos.
 
 ## Secciones
-Inicio (buscador, accesos rápidos, agenda) · Update · Actualidad · Nuestro Valle · Comités · Gastos Comunes · Infraestructura · Proyectos y Obras · Seguridad y Emergencias · Documentos y Normas · Preguntas Frecuentes · Contacto
+Update (alertas, primero) · Inicio (buscador, accesos rápidos, agenda) · Actualidad · Nuestro Valle · Comités · Gastos Comunes · Infraestructura · Proyectos y Obras · Seguridad y Emergencias · Documentos y Normas · Preguntas Frecuentes · Contacto
 
 ## Pendiente
 Reemplazar textos de ejemplo: historia, plano, conserjes, horario de basura, correo Brigada, PDFs, datos bancarios, directivas y agenda.
