@@ -1,11 +1,16 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Portal informativo de la comunidad Valle Verde Mar: actualidad, gastos comunes, infraestructura, seguridad, normas y contactos.">
 <title>Comunidad VVM</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600;700&display=swap">
-
+<style>img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
 <style>
 /* ── Tokens ── */
 :root {
@@ -440,119 +445,6 @@ nav {
   padding-top: 8px;
   border-top: 1px solid var(--border);
 }
-
-.noticia-leer-mas {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  font-size: 0.78rem;
-  font-weight: 600;
-  color: var(--brand);
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 0;
-  font-family: 'DM Sans', sans-serif;
-  margin-top: 2px;
-  text-decoration: none;
-}
-.noticia-leer-mas:hover { text-decoration: underline; }
-
-/* ── MODAL ── */
-.modal-overlay {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.55);
-  z-index: 200;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-}
-.modal-overlay.open { display: flex; }
-.modal-box {
-  background: var(--surface);
-  border-radius: 16px;
-  max-width: 580px;
-  width: 100%;
-  max-height: 85vh;
-  overflow-y: auto;
-  padding: 32px 32px 28px;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.25);
-}
-.modal-close {
-  position: absolute;
-  top: 16px;
-  right: 16px;
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  background: var(--surface2);
-  border: 1px solid var(--border);
-  color: var(--muted);
-  font-size: 1.1rem;
-  cursor: pointer;
-  display: grid;
-  place-items: center;
-  line-height: 1;
-}
-.modal-close:hover { background: var(--border); }
-.modal-tag {
-  display: inline-flex;
-  align-items: center;
-  padding: 3px 9px;
-  border-radius: 99px;
-  font-size: 0.67rem;
-  font-weight: 700;
-  letter-spacing: 0.07em;
-  text-transform: uppercase;
-  background: var(--tag-bg);
-  color: var(--tag-fg);
-  width: fit-content;
-}
-.modal-title {
-  font-family: 'Playfair Display', Georgia, serif;
-  font-size: 1.3rem;
-  font-weight: 700;
-  line-height: 1.3;
-  color: var(--text);
-}
-.modal-body {
-  font-size: 0.92rem;
-  color: var(--muted);
-  line-height: 1.75;
-  white-space: pre-line;
-}
-.modal-date {
-  font-size: 0.73rem;
-  color: var(--muted);
-  padding-top: 12px;
-  border-top: 1px solid var(--border);
-}
-
-/* ── DRIVE LINK ── */
-.drive-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 12px 18px;
-  font-size: 0.88rem;
-  font-weight: 600;
-  color: var(--text);
-  text-decoration: none;
-  transition: background 0.15s, border-color 0.15s;
-  margin-top: 4px;
-  width: fit-content;
-}
-.drive-link:hover { background: var(--surface2); border-color: var(--brand); color: var(--brand); }
-.drive-link svg { flex-shrink: 0; }
 
 /* ── GASTOS ── */
 .gastos-layout {
@@ -1331,8 +1223,376 @@ footer {
   padding: 18px 28px;
 }
 
+/* ══ AGREGADOS (estructura propuesta) — reutilizan los mismos tokens ══ */
+
+/* Sub-navegación de escritorio (segunda fila del nav, mismo estilo) */
+.nav-sub {
+  border-top: 1px solid var(--border);
+}
+.nav-sub .nav-links {
+  max-width: 980px;
+  margin-inline: auto;
+  padding-inline: 10px;
+  min-height: 40px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.nav-sub .nav-links::-webkit-scrollbar { display: none; }
+.nav-sub .nav-links { justify-content: space-between; }
+.nav-sub .nav-links a { white-space: nowrap; padding-inline: 8px; }
+
+section[id] { scroll-margin-top: 104px; }
+@media (max-width: 900px) { section[id] { scroll-margin-top: 68px; } }
+
+/* Sello "Actualizado" junto al título de sección */
+.section-updated {
+  font-size: 0.7rem;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+/* Subtítulos dentro de una sección */
+.sub-title {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 28px 0 12px;
+}
+.sub-title:first-child { margin-top: 0; }
+
+.section-lead {
+  font-size: 0.92rem;
+  color: var(--muted);
+  max-width: 68ch;
+  line-height: 1.7;
+  margin-bottom: 18px;
+}
+
+/* Grilla de tarjetas informativas (usa .gasto-block) */
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 12px;
+}
+.info-grid .gasto-block ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  font-size: 0.88rem;
+  color: var(--muted);
+}
+.info-grid .gasto-block li { padding-left: 16px; position: relative; }
+.info-grid .gasto-block li::before {
+  content: '·';
+  position: absolute;
+  left: 4px;
+  color: var(--brand);
+  font-weight: 700;
+}
+.info-grid .gasto-block ul.si li::before { content: '✓'; left: 0; }
+.info-grid .gasto-block ul.no li::before { content: '✕'; left: 0; color: var(--muted); }
+.card-icon { font-size: 1.25rem; line-height: 1; }
+
+/* Buscador + accesos rápidos */
+.inicio-box {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.search-wrap { position: relative; }
+.search-input {
+  width: 100%;
+  padding: 16px 20px 16px 48px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 1rem;
+}
+.search-input:focus { outline: 2px solid var(--brand); outline-offset: 2px; }
+.search-ico {
+  position: absolute;
+  left: 18px;
+  top: 17px;
+  color: var(--muted);
+  pointer-events: none;
+}
+.search-results {
+  margin-top: 8px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+}
+.search-result {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  padding: 12px 18px;
+  border: none;
+  border-bottom: 1px solid var(--border);
+  background: none;
+  color: var(--text);
+  text-align: left;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+.search-result:last-child { border-bottom: none; }
+.search-result:hover, .search-result:focus-visible { background: var(--surface2); outline: none; }
+.search-result small { color: var(--muted); font-size: 0.75rem; white-space: nowrap; }
+.search-empty { padding: 14px 18px; font-size: 0.88rem; color: var(--muted); }
+
+.quick-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+.quick-grid .doc-item { padding: 14px 16px; }
+.quick-grid .doc-icon { font-size: 1.1rem; }
+.quick-grid .doc-arrow { display: none; }
+
+.agenda-list { display: flex; flex-direction: column; gap: 8px; }
+.agenda-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 12px 18px;
+}
+.agenda-date {
+  flex-shrink: 0;
+  width: 52px;
+  text-align: center;
+  line-height: 1.1;
+}
+.agenda-day {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--brand);
+  font-variant-numeric: tabular-nums;
+}
+.agenda-mon {
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.agenda-text { min-width: 0; }
+.agenda-title { font-weight: 600; font-size: 0.92rem; }
+.agenda-sub { font-size: 0.8rem; color: var(--muted); }
+
+/* Chips de filtro */
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+.chip {
+  padding: 6px 14px;
+  border-radius: 99px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--muted);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+.chip:hover { border-color: var(--muted); color: var(--text); }
+.chip.active { background: var(--brand-pale); border-color: var(--brand-mid); color: var(--brand); }
+.chip:focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; }
+
+/* FAQ agrupada */
+.faq-group-title {
+  grid-column: 1 / -1;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 18px 0 4px;
+}
+.faq-group-title:first-child { margin-top: 0; }
+.faq-body ol, .faq-body ul { padding-left: 20px; display: flex; flex-direction: column; gap: 4px; }
+.faq-body a { color: var(--brand); }
+
+/* Pasos (mantención de caminos) */
+.steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 10px;
+}
+.step {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.step-num {
+  width: 26px; height: 26px;
+  border-radius: 50%;
+  background: var(--brand-pale);
+  color: var(--brand);
+  display: grid;
+  place-items: center;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+.step-title { font-weight: 600; font-size: 0.92rem; }
+.step-text { font-size: 0.83rem; color: var(--muted); line-height: 1.55; }
+
+/* Números de emergencia */
+.emerg-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 10px;
+}
+.emerg-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.emerg-num {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.7rem;
+  font-weight: 700;
+  color: var(--brand);
+  line-height: 1.1;
+  font-variant-numeric: tabular-nums;
+  user-select: all;
+}
+.emerg-num.small { font-size: 1.05rem; padding-block: 6px; }
+.emerg-label { font-size: 0.8rem; color: var(--muted); }
+
+/* Conserjes */
+.persona {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.persona-foto {
+  width: 52px; height: 52px;
+  border-radius: 50%;
+  background: var(--brand-pale);
+  border: 1px solid var(--border);
+  color: var(--brand);
+  display: grid;
+  place-items: center;
+  font-weight: 700;
+  font-size: 0.9rem;
+  flex-shrink: 0;
+  object-fit: cover;
+}
+.persona-nombre { font-weight: 600; font-size: 0.92rem; color: var(--text); }
+.persona-rol { font-size: 0.8rem; color: var(--muted); }
+
+/* Plano */
+.plano-box {
+  border: 1px dashed var(--border);
+  border-radius: 14px;
+  background: var(--surface2);
+  min-height: 220px;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  padding: 24px;
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+.plano-box strong { display: block; color: var(--text); font-size: 0.95rem; margin-bottom: 4px; }
+.legend { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 12px; font-size: 0.82rem; color: var(--muted); }
+.legend span { display: inline-flex; align-items: center; gap: 8px; }
+.legend i { width: 18px; height: 4px; border-radius: 2px; display: inline-block; }
+.l-propio { background: var(--brand); }
+.l-privado { background: var(--gold); }
+.l-serv { background: repeating-linear-gradient(90deg, var(--muted) 0 4px, transparent 4px 7px); }
+
+/* Nota sencilla */
+.nota {
+  background: var(--green-soft);
+  border-left: 3px solid var(--brand-light);
+  border-radius: 0 10px 10px 0;
+  padding: 14px 18px;
+  font-size: 0.86rem;
+  color: var(--muted);
+  line-height: 1.65;
+  margin-top: 14px;
+}
+.nota strong { color: var(--text); }
+
+/* Formulario de contacto */
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.form-grid label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--muted);
+}
+.form-grid .full { grid-column: 1 / -1; }
+.form-grid textarea {
+  min-height: 110px;
+  resize: vertical;
+  padding: 10px 14px;
+  border-radius: 9px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.92rem;
+}
+.form-grid textarea:focus, .form-grid select:focus { outline: 2px solid var(--brand); outline-offset: 2px; }
+.btn-primary {
+  justify-self: start;
+  padding: 11px 22px;
+  border-radius: 9px;
+  border: none;
+  background: var(--brand);
+  color: #fff;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+[data-theme="dark"] .btn-primary { color: #0E2018; }
+.btn-primary:focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; }
+.form-msg { font-size: 0.85rem; color: var(--muted); line-height: 1.6; }
+.form-msg strong { color: var(--text); user-select: all; }
+
+.flash { outline: 2px solid var(--brand); outline-offset: 3px; border-radius: 12px; }
+
 /* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  .nav-sub { display: none; }
+  .nav-hamburger { display: flex; }
+}
 @media (max-width: 700px) {
+  .quick-grid { grid-template-columns: 1fr 1fr; }
+  .form-grid { grid-template-columns: 1fr; }
+  .section-updated { display: none; }
   .nav-links { display: none; }
   .nav-hamburger { display: flex; }
   .a11y-bar .theme-label { display: none; }
@@ -1348,9 +1608,6 @@ footer {
 }
 </style>
 
-</head>
-<body>
-
 <!-- NAV -->
 <nav>
   <div class="nav-inner">
@@ -1358,17 +1615,6 @@ footer {
       <div class="nav-logo-badge">VVM</div>
       <span class="nav-tagline">Portal Comunitario</span>
     </a>
-    <ul class="nav-links">
-      <li><a href="#urgente">Urgente</a></li>
-      <li><a href="#noticias">Noticias</a></li>
-      <li><a href="#faq">Preguntas</a></li>
-      <li><a href="#gastos">Gastos</a></li>
-      <li><a href="#comites">Comités</a></li>
-      <li><a href="#proyectos">Proyectos</a></li>
-      <li><a href="#documentos">Documentos</a></li>
-      <li><a href="#contactos">Contactos</a></li>
-    </ul>
-
     <div class="a11y-bar">
       <button class="a11y-btn" id="fontDown" title="Achicar texto" aria-label="Achicar texto">A−</button>
       <button class="a11y-btn" id="fontUp" title="Agrandar texto" aria-label="Agrandar texto">A+</button>
@@ -1381,29 +1627,32 @@ footer {
       </button>
     </div>
   </div>
-</nav>
-
-<!-- MODAL NOTICIA -->
-<div class="modal-overlay" id="noticiaModal" onclick="closeModal(event)">
-  <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-    <button class="modal-close" onclick="closeNoticiaModal()" aria-label="Cerrar">×</button>
-    <span class="modal-tag" id="modalTag"></span>
-    <h2 class="modal-title" id="modalTitle"></h2>
-    <div class="modal-body" id="modalBody"></div>
-    <div class="modal-date" id="modalDate"></div>
+  <div class="nav-sub">
+    <ul class="nav-links">
+      <li><a href="#inicio">Inicio</a></li>
+      <li><a href="#valle">Nuestro Valle</a></li>
+      <li><a href="#gastos">Gastos Comunes</a></li>
+      <li><a href="#infraestructura">Infraestructura</a></li>
+      <li><a href="#seguridad">Seguridad</a></li>
+      <li><a href="#documentos">Documentos</a></li>
+      <li><a href="#noticias">Actualidad</a></li>
+      <li><a href="#faq">Preguntas</a></li>
+      <li><a href="#contactos">Contacto</a></li>
+    </ul>
   </div>
-</div>
+</nav>
 
 <!-- MENÚ MÓVIL -->
 <div class="mobile-menu" id="mobileMenu" role="dialog" aria-label="Menú de navegación">
-  <a href="#urgente"   onclick="closeMobileMenu()">🚨 Urgente</a>
-  <a href="#noticias"  onclick="closeMobileMenu()">📢 Noticias</a>
-  <a href="#faq"       onclick="closeMobileMenu()">❓ Preguntas Frecuentes</a>
-  <a href="#gastos"    onclick="closeMobileMenu()">💰 Gastos Comunes</a>
-  <a href="#comites"   onclick="closeMobileMenu()">🏛️ Comités</a>
-  <a href="#proyectos" onclick="closeMobileMenu()">🔨 Proyectos y Obras</a>
-  <a href="#documentos" onclick="closeMobileMenu()">📄 Documentos</a>
-  <a href="#contactos" onclick="closeMobileMenu()">📞 Contactos</a>
+  <a href="#inicio" onclick="closeMobileMenu()">🏠 Inicio</a>
+  <a href="#valle" onclick="closeMobileMenu()">🌿 Nuestro Valle</a>
+  <a href="#gastos" onclick="closeMobileMenu()">💰 Gastos Comunes</a>
+  <a href="#infraestructura" onclick="closeMobileMenu()">🛣️ Infraestructura</a>
+  <a href="#seguridad" onclick="closeMobileMenu()">🧯 Seguridad y Emergencias</a>
+  <a href="#documentos" onclick="closeMobileMenu()">📄 Documentos y Normas</a>
+  <a href="#noticias" onclick="closeMobileMenu()">📢 Actualidad</a>
+  <a href="#faq" onclick="closeMobileMenu()">❓ Preguntas Frecuentes</a>
+  <a href="#contactos" onclick="closeMobileMenu()">📞 Contacto</a>
 </div>
 
 <!-- HERO -->
@@ -1412,7 +1661,7 @@ footer {
   <div class="hero-inner">
     <span class="hero-eyebrow">Valle Verde Mar · Portal Comunitario</span>
     <h1 class="hero-title">Un lugar diferente<br><em>para Vivir</em></h1>
-    <p class="hero-desc">Toda la información de Valle Vista Macrolotes en un solo lugar. Transparente, directa y siempre actualizada por tus comités.</p>
+    <p class="hero-desc">Toda la información de Valle Verde Mar en un solo lugar. Transparente, directa y siempre actualizada por tus comités.</p>
     <a class="hero-wsp-btn" href="https://wa.me/56982760850" target="_blank" rel="noopener">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
       Portería Valle Verde Mar
@@ -1421,6 +1670,60 @@ footer {
 </div>
 
 <main class="main">
+  <!-- INICIO: buscador, accesos rápidos y agenda -->
+  <section id="inicio">
+    <div class="section-header">
+      <div class="section-accent"></div>
+      <h2 class="section-title">¿Qué necesitas saber?</h2>
+      <div class="section-rule"></div>
+    </div>
+    <div class="inicio-box">
+      <div class="search-wrap">
+        <span class="search-ico" aria-hidden="true">🔍</span>
+        <input id="searchInput" class="search-input" type="search" placeholder="Ej: basura, camión, mascotas, control remoto, GGCC…" aria-label="Buscar en el portal" autocomplete="off">
+        <div id="searchResults" class="search-results" hidden></div>
+      </div>
+      <div>
+        <p class="sub-title">Accesos rápidos</p>
+        <div class="quick-grid">
+        <a href="#gastos" class="doc-item" data-s="Gastos Comunes">
+          <div class="doc-icon" aria-hidden="true">💰</div>
+          <div class="doc-text"><p class="doc-name">Gastos Comunes</p><p class="doc-sub">Monto, pago y convenios</p></div>
+          <span class="doc-arrow">→</span>
+        </a>
+        <a href="#documentos" class="doc-item" data-s="Reglamentos">
+          <div class="doc-icon" aria-hidden="true">📘</div>
+          <div class="doc-text"><p class="doc-name">Reglamentos</p><p class="doc-sub">Versión vigente</p></div>
+          <span class="doc-arrow">→</span>
+        </a>
+        <a href="#protocolos" class="doc-item" data-s="Protocolos de acceso">
+          <div class="doc-icon" aria-hidden="true">🚗</div>
+          <div class="doc-text"><p class="doc-name">Protocolos de acceso</p><p class="doc-sub">Visitas, trabajadores, camiones</p></div>
+          <span class="doc-arrow">→</span>
+        </a>
+        <a href="#plano" class="doc-item" data-s="Plano del Valle">
+          <div class="doc-icon" aria-hidden="true">🗺️</div>
+          <div class="doc-text"><p class="doc-name">Plano del Valle</p><p class="doc-sub">Límites y caminos</p></div>
+          <span class="doc-arrow">→</span>
+        </a>
+        <a href="#contactos" class="doc-item" data-s="Contactos">
+          <div class="doc-icon" aria-hidden="true">📞</div>
+          <div class="doc-text"><p class="doc-name">Contactos</p><p class="doc-sub">Comités y directivas</p></div>
+          <span class="doc-arrow">→</span>
+        </a>
+        <a href="#seguridad" class="doc-item" data-s="Emergencias">
+          <div class="doc-icon" aria-hidden="true">🧯</div>
+          <div class="doc-text"><p class="doc-name">Emergencias</p><p class="doc-sub">Números y qué hacer</p></div>
+          <span class="doc-arrow">→</span>
+        </a>
+        </div>
+      </div>
+      <div>
+        <p class="sub-title">Próximas asambleas y actividades</p>
+        <div class="agenda-list" id="agendaList"></div>
+      </div>
+    </div>
+  </section>
 
   <!-- UPDATE DIARIO -->
   <section id="urgente">
@@ -1442,7 +1745,7 @@ footer {
   <section id="noticias">
     <div class="section-header">
       <div class="section-accent"></div>
-      <h2 class="section-title">📢 Noticias Importantes</h2>
+      <h2 class="section-title">📢 Actualidad</h2>
       <div class="section-rule"></div>
     </div>
 
@@ -1454,77 +1757,101 @@ footer {
       <select class="car-select" id="carSelect" aria-label="Seleccionar mes"></select>
     </div>
 
+
+    <div class="chips" id="newsChips" role="group" aria-label="Filtrar publicaciones">
+      <button class="chip active" data-f="todos">Todos</button>
+      <button class="chip" data-f="comunicado">Comunicados</button>
+      <button class="chip" data-f="noticia">Noticias</button>
+      <button class="chip" data-f="asamblea">Asambleas</button>
+      <button class="chip" data-f="actividad">Actividades</button>
+      <button class="chip" data-f="emergencia">Emergencias</button>
+    </div>
     <!-- Slides por mes (generados por JS) -->
     <div class="carousel-track" id="carTrack"></div>
+      <p class="nota">Los grupos de WhatsApp comparten un resumen con enlace. <strong>El contenido completo y vigente siempre queda aquí.</strong> Usa el selector de mes para ver el archivo histórico.</p>
   </section>
 
-  <!-- PREGUNTAS FRECUENTES -->
-  <section id="faq">
+  <!-- NUESTRO VALLE -->
+  <section id="valle">
     <div class="section-header">
       <div class="section-accent"></div>
-      <h2 class="section-title">❓ Preguntas Frecuentes</h2>
+      <h2 class="section-title">🌿 Nuestro Valle</h2>
       <div class="section-rule"></div>
     </div>
-    <div class="faq-list" id="faqList">
-      <div class="car-loading"><div class="car-spinner"></div>Cargando preguntas…</div>
-    </div>
-  </section>
+    <p class="section-lead" data-s="Historia de Valle Verde Mar">Valle Verde Mar es una comunidad rural de más de 1.500 parcelas, organizada por sus propios vecinos. Nació como un loteo de macrolotes que con los años fue sumando etapas, caminos y servicios comunes. Aquí encontrarás, en simple, cómo está formado y cómo se organiza.</p>
 
-  <!-- GASTOS COMUNES -->
-  <section id="gastos">
-    <div class="section-header">
-      <div class="section-accent"></div>
-      <h2 class="section-title">Gastos Comunes</h2>
-      <div class="section-rule"></div>
+    <p class="sub-title">El Valle en simple</p>
+    <div class="info-grid">
+        <div class="gasto-block" data-s="Historia del Valle">
+          <span class="card-icon" aria-hidden="true">📜</span>
+          <span class="gasto-block-title">Historia</span>
+          <p>Breve reseña de cómo nació Valle Verde Mar y cómo ha crecido. <strong>Texto por completar por el Comité.</strong></p>
+        </div>
+        <div class="gasto-block" data-s="Carácter rural">
+          <span class="card-icon" aria-hidden="true">🌾</span>
+          <span class="gasto-block-title">Carácter rural</span>
+          <p>Somos un sector rural: caminos de tierra y maicillo, naturaleza y parcelas amplias. Eso implica cuidar juntos los caminos, el agua y la prevención de incendios.</p>
+        </div>
+        <div class="gasto-block" data-s="Tamaño y desarrollo del Valle">
+          <span class="card-icon" aria-hidden="true">📐</span>
+          <span class="gasto-block-title">Tamaño</span>
+          <p><strong>1.500+</strong> parcelas · <strong>27</strong> macrolotes · <strong>4</strong> etapas.</p>
+        </div>
     </div>
-    <div class="gastos-layout">
-      <div class="gasto-highlight">
-        <span class="gasto-eyebrow">Cuota mensual</span>
-        <div class="gasto-amount">$18.500</div>
-        <p class="gasto-period">Por parcela · Todas las etapas</p>
-        <span class="gasto-deadline">Vence el 15 de cada mes</span>
-      </div>
-      <div class="gastos-right">
-        <div class="gasto-block">
-          <span class="gasto-block-title">Cómo pagar</span>
-          <p>Transferencia a <strong>Comunidad VVM · Banco Estado</strong><br>
-          Cta. cte. 00-123456-78 · RUT 65.432.100-9<br>
-          Asunto: <strong>Parcela N° + tu número</strong></p>
+
+    <p class="sub-title">Etapas y macrolotes</p>
+    <div class="info-grid">
+        <div class="gasto-block" data-s="Qué es una Etapa">
+          <span class="card-icon" aria-hidden="true">🧩</span>
+          <span class="gasto-block-title">¿Qué es una Etapa?</span>
+          <p>Es un sector del Valle que agrupa varios macrolotes. Cada Etapa tiene su propia directiva, elegida por sus propietarios.</p>
         </div>
-        <div class="gasto-block">
-          <span class="gasto-block-title">En qué se gasta</span>
-          <div class="gasto-bars">
-            <div class="gasto-bar-item">
-              <div class="gasto-bar-header">
-                <span class="gasto-bar-label">Mantención caminos</span>
-                <span class="gasto-bar-pct">40%</span>
-              </div>
-              <div class="gasto-bar-track"><div class="gasto-bar-fill" style="width:40%"></div></div>
-            </div>
-            <div class="gasto-bar-item">
-              <div class="gasto-bar-header">
-                <span class="gasto-bar-label">Seguridad 24 hrs</span>
-                <span class="gasto-bar-pct">30%</span>
-              </div>
-              <div class="gasto-bar-track"><div class="gasto-bar-fill" style="width:30%"></div></div>
-            </div>
-            <div class="gasto-bar-item">
-              <div class="gasto-bar-header">
-                <span class="gasto-bar-label">Áreas verdes y limpieza</span>
-                <span class="gasto-bar-pct">20%</span>
-              </div>
-              <div class="gasto-bar-track"><div class="gasto-bar-fill" style="width:20%"></div></div>
-            </div>
-            <div class="gasto-bar-item">
-              <div class="gasto-bar-header">
-                <span class="gasto-bar-label">Administración general</span>
-                <span class="gasto-bar-pct">10%</span>
-              </div>
-              <div class="gasto-bar-track"><div class="gasto-bar-fill" style="width:10%"></div></div>
-            </div>
-          </div>
+        <div class="gasto-block" data-s="Qué es un macrolote">
+          <span class="card-icon" aria-hidden="true">🏡</span>
+          <span class="gasto-block-title">¿Qué es un macrolote?</span>
+          <p>Es un terreno mayor que se subdividió en parcelas. Cada macrolote puede tener su propia directiva y gastos internos.</p>
         </div>
-      </div>
+        <div class="gasto-block" data-s="Relación entre Etapas y Comité General">
+          <span class="card-icon" aria-hidden="true">🔗</span>
+          <span class="gasto-block-title">¿Cómo se relacionan?</span>
+          <p>Las directivas de Etapa forman el <strong>Comité General</strong>, que ve los temas de todo el Valle: caminos principales, accesos, seguridad y presupuesto común.</p>
+        </div>
+    </div>
+
+    <p class="sub-title">Equipo de conserjería</p>
+    <div class="info-grid">
+        <div class="gasto-block" data-s="Conserje turno día">
+          <div class="persona"><div class="persona-foto" aria-hidden="true">C1</div><div><p class="persona-nombre">Nombre Conserje</p><p class="persona-rol">Turno día</p></div></div>
+        </div>
+        <div class="gasto-block" data-s="Conserje turno noche">
+          <div class="persona"><div class="persona-foto" aria-hidden="true">C2</div><div><p class="persona-nombre">Nombre Conserje</p><p class="persona-rol">Turno noche</p></div></div>
+        </div>
+        <div class="gasto-block" data-s="Funciones y responsabilidades de conserjes">
+          <span class="gasto-block-title">Funciones de conserjería</span>
+          <ul><li>Controlar el ingreso de visitas, trabajadores y vehículos.</li><li>Registrar novedades y avisar al Comité.</li><li>Orientar a vecinos y visitas.</li><li>Dar aviso ante emergencias.</li></ul>
+        </div>
+    </div>
+
+    <p class="sub-title" id="plano">Plano y territorio</p>
+    <div class="plano-box" data-s="Plano del Valle">
+      <div><strong>Plano general del Valle</strong>Aquí irá el plano ampliable (imagen o PDF) con etapas, macrolotes y caminos.</div>
+    </div>
+    <div class="legend" aria-label="Tipos de caminos y terrenos">
+      <span><i class="l-propio"></i>Camino o terreno del Valle</span>
+      <span><i class="l-privado"></i>Terreno privado (no es del Valle)</span>
+      <span><i class="l-serv"></i>Servidumbre (ej. Lincoyan, Sonacol)</span>
+    </div>
+    <div class="info-grid" style="margin-top:14px">
+        <div class="gasto-block" data-s="Límites de Valle Verde Mar">
+          <span class="card-icon" aria-hidden="true">📍</span>
+          <span class="gasto-block-title">Límites del Valle</span>
+          <p>Descripción general de dónde empieza y termina Valle Verde Mar, y qué sectores cercanos <strong>no</strong> pertenecen a la comunidad.</p>
+        </div>
+        <div class="gasto-block" data-s="Servidumbres Lincoyan Sonacol">
+          <span class="card-icon" aria-hidden="true">↔️</span>
+          <span class="gasto-block-title">¿Qué es una servidumbre?</span>
+          <p>Es un derecho de paso o de uso sobre un terreno que pertenece a otro. Por ejemplo, las franjas de Lincoyan o Sonacol: se pueden usar según lo acordado, pero no son del Valle.</p>
+        </div>
     </div>
   </section>
 
@@ -1580,6 +1907,189 @@ footer {
         </div>
       </div>
     </div>
+    <div class="nota" data-s="Directivas de macrolote">Las <strong>directivas de cada macrolote</strong> se encuentran en <a href="#contactos" style="color:var(--brand)">Contacto → Contacto por Macrolote</a>.</div>
+  </section>
+
+  <!-- GASTOS COMUNES -->
+  <section id="gastos">
+    <div class="section-header">
+      <div class="section-accent"></div>
+      <h2 class="section-title">Gastos Comunes</h2>
+      <div class="section-rule"></div>
+      <span class="section-updated">Actualizado sep 2026</span>
+    </div>
+    <div class="gastos-layout">
+      <div class="gasto-highlight">
+        <span class="gasto-eyebrow">Cuota mensual</span>
+        <div class="gasto-amount">$18.500</div>
+        <p class="gasto-period">Por parcela · Todas las etapas</p>
+        <span class="gasto-deadline">Vence el 15 de cada mes</span>
+      </div>
+      <div class="gastos-right">
+        <div class="gasto-block">
+          <span class="gasto-block-title">Cómo pagar</span>
+          <p>Transferencia a <strong>Comunidad VVM · Banco Estado</strong><br>
+          Cta. cte. 00-123456-78 · RUT 65.432.100-9<br>
+          Asunto: <strong>Parcela N° + tu número</strong></p>
+        </div>
+        <div class="gasto-block">
+          <span class="gasto-block-title">En qué se gasta</span>
+          <div class="gasto-bars">
+            <div class="gasto-bar-item">
+              <div class="gasto-bar-header">
+                <span class="gasto-bar-label">Mantención caminos</span>
+                <span class="gasto-bar-pct">40%</span>
+              </div>
+              <div class="gasto-bar-track"><div class="gasto-bar-fill" style="width:40%"></div></div>
+            </div>
+            <div class="gasto-bar-item">
+              <div class="gasto-bar-header">
+                <span class="gasto-bar-label">Seguridad 24 hrs</span>
+                <span class="gasto-bar-pct">30%</span>
+              </div>
+              <div class="gasto-bar-track"><div class="gasto-bar-fill" style="width:30%"></div></div>
+            </div>
+            <div class="gasto-bar-item">
+              <div class="gasto-bar-header">
+                <span class="gasto-bar-label">Áreas verdes y limpieza</span>
+                <span class="gasto-bar-pct">20%</span>
+              </div>
+              <div class="gasto-bar-track"><div class="gasto-bar-fill" style="width:20%"></div></div>
+            </div>
+            <div class="gasto-bar-item">
+              <div class="gasto-bar-header">
+                <span class="gasto-bar-label">Administración general</span>
+                <span class="gasto-bar-pct">10%</span>
+              </div>
+              <div class="gasto-bar-track"><div class="gasto-bar-fill" style="width:10%"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+      <p class="sub-title" style="margin-top:28px">Entiende tus Gastos Comunes</p>
+    <div class="faq-list">
+      <div class="faq-item" data-s="¿Qué son y qué financian?">
+        <button class="faq-btn" onclick="toggleItem(this)" aria-expanded="false"><span>¿Qué son y qué financian?</span><span class="faq-icon" aria-hidden="true">+</span></button>
+        <div class="faq-body">Es el aporte mensual de cada parcela para mantener lo que usamos todos: caminos, conserjería y accesos, retiro de basura, seguridad y administración.</div>
+      </div>
+      <div class="faq-item" data-s="¿Cómo se determina el monto?">
+        <button class="faq-btn" onclick="toggleItem(this)" aria-expanded="false"><span>¿Cómo se determina el monto?</span><span class="faq-icon" aria-hidden="true">+</span></button>
+        <div class="faq-body">El Comité General prepara un presupuesto anual con los costos esperados. Ese total se divide entre las parcelas y se aprueba en asamblea.</div>
+      </div>
+      <div class="faq-item" data-s="GGCC General vs. GGCC de macrolote">
+        <button class="faq-btn" onclick="toggleItem(this)" aria-expanded="false"><span>GGCC General vs. GGCC de macrolote</span><span class="faq-icon" aria-hidden="true">+</span></button>
+        <div class="faq-body"><ul><li><strong>General:</strong> lo paga todo el Valle y financia lo común (caminos principales, accesos, basura).</li><li><strong>Interno de macrolote:</strong> lo define cada macrolote para sus propios gastos (sus caminos internos, portones, etc.).</li></ul></div>
+      </div>
+      <div class="faq-item" data-s="Fondos de reserva o provisión">
+        <button class="faq-btn" onclick="toggleItem(this)" aria-expanded="false"><span>Fondos de reserva o provisión</span><span class="faq-icon" aria-hidden="true">+</span></button>
+        <div class="faq-body">Es un ahorro para imprevistos y reparaciones mayores (por ejemplo, un camino dañado por lluvias). Evita cobros extraordinarios de golpe.</div>
+      </div>
+      <div class="faq-item" data-s="Morosidad, convenios y cobranza">
+        <button class="faq-btn" onclick="toggleItem(this)" aria-expanded="false"><span>Morosidad, convenios y cobranza</span><span class="faq-icon" aria-hidden="true">+</span></button>
+        <div class="faq-body">Si no pagas a tiempo, la deuda acumula recargos según el reglamento y puede pasar a cobranza. Si tienes dificultades, escribe a tesorería: se puede acordar un <strong>convenio de pago</strong>.</div>
+      </div>
+      <div class="faq-item" data-s="Rendiciones y reportes">
+        <button class="faq-btn" onclick="toggleItem(this)" aria-expanded="false"><span>Rendiciones y reportes</span><span class="faq-icon" aria-hidden="true">+</span></button>
+        <div class="faq-body">Las rendiciones que el Comité decida publicar estarán en <a href="#documentos">Documentos y Normas</a>, filtrando por “Rendiciones”.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INFRAESTRUCTURA -->
+  <section id="infraestructura">
+    <div class="section-header">
+      <div class="section-accent"></div>
+      <h2 class="section-title">🛣️ Infraestructura</h2>
+      <div class="section-rule"></div>
+      <span class="section-updated">Actualizado sep 2026</span>
+    </div>
+    <p class="sub-title">Caminos · así se hace una mantención</p>
+    <div class="steps">
+        <div class="step" data-s="Motoniveladora" data-k="maquinaria caminos camion">
+          <div class="step-num">1</div>
+          <p class="step-title">Motoniveladora</p>
+          <p class="step-text">Empareja y da forma al camino, recupera la pendiente para que escurra el agua.</p>
+        </div>
+        <div class="step" data-s="Camión aljibe" data-k="maquinaria caminos camion">
+          <div class="step-num">2</div>
+          <p class="step-title">Camión aljibe</p>
+          <p class="step-text">Humedece el material para que se compacte bien y no se levante polvo.</p>
+        </div>
+        <div class="step" data-s="Rodillo" data-k="maquinaria caminos camion">
+          <div class="step-num">3</div>
+          <p class="step-title">Rodillo</p>
+          <p class="step-text">Compacta el maicillo para dejar una superficie firme y duradera.</p>
+        </div>
+        <div class="step" data-s="Excavadora" data-k="maquinaria caminos camion">
+          <div class="step-num">4</div>
+          <p class="step-title">Excavadora</p>
+          <p class="step-text">Limpia zanjas, ductos y remueve material en zonas dañadas.</p>
+        </div>
+        <div class="step" data-s="Camión tolva" data-k="maquinaria caminos camion">
+          <div class="step-num">5</div>
+          <p class="step-title">Camión tolva</p>
+          <p class="step-text">Trae el maicillo o material desde la cantera hasta el camino.</p>
+        </div>
+    </div>
+    <div class="info-grid" style="margin-top:12px">
+        <div class="gasto-block" data-s="Por qué se usa maicillo">
+          <span class="card-icon" aria-hidden="true">🪨</span>
+          <span class="gasto-block-title">¿Por qué maicillo?</span>
+          <p>Es un material granular que compacta bien, drena el agua y es más económico que pavimentar. Tenerlo disponible es clave para reparar a tiempo.</p>
+        </div>
+        <div class="gasto-block" data-s="Cómo se priorizan las mantenciones de caminos">
+          <span class="card-icon" aria-hidden="true">📋</span>
+          <span class="gasto-block-title">¿Cómo se prioriza?</span>
+          <ul><li>Seguridad: tramos peligrosos primero.</li><li>Caminos más usados o de acceso principal.</li><li>Daños que empeoran con lluvia.</li><li>Presupuesto disponible.</li></ul>
+        </div>
+    </div>
+
+    <p class="sub-title">Material y contratista cerca del Valle</p>
+    <div class="info-grid">
+        <div class="gasto-block" data-s="Beneficio de tener material y contratista cerca">
+          <span class="card-icon" aria-hidden="true">✅</span>
+          <span class="gasto-block-title">Si están cerca</span>
+          <ul class="si"><li>Menores tiempos y costos de traslado.</li><li>Respuesta rápida ante deterioros.</li><li>Mantenciones más frecuentes con el mismo presupuesto.</li></ul>
+        </div>
+        <div class="gasto-block" data-s="Qué pasa si el material se trae de lejos">
+          <span class="card-icon" aria-hidden="true">⚠️</span>
+          <span class="gasto-block-title">Si hay que traerlos de lejos</span>
+          <ul class="no"><li>Cada viaje cuesta más y tarda más.</li><li>La maquinaria debe trasladarse desde lejos.</li><li>Menos mantenciones al año con el mismo dinero.</li></ul>
+        </div>
+    </div>
+
+    <p class="sub-title">Ductos y aguas lluvias</p>
+    <div class="info-grid">
+        <div class="gasto-block" data-s="Ductos y evacuación de aguas lluvias">
+          <span class="card-icon" aria-hidden="true">💧</span>
+          <span class="gasto-block-title">Por qué importan</span>
+          <p>El agua es el principal enemigo de un camino de tierra. Si los ductos y zanjas se tapan, el agua corre por el camino y lo destruye.</p>
+        </div>
+        <div class="gasto-block" data-s="Responsabilidades de mantención de ductos">
+          <span class="card-icon" aria-hidden="true">🙋</span>
+          <span class="gasto-block-title">Qué puedes hacer tú</span>
+          <ul><li>No tapar zanjas ni ductos frente a tu parcela.</li><li>No botar ramas ni escombros en ellos.</li><li>Avisar si ves uno obstruido.</li></ul>
+        </div>
+    </div>
+
+    <p class="sub-title">Basura e instalaciones</p>
+    <div class="info-grid">
+        <div class="gasto-block" data-s="Ubicación horario y retiro de bateas de basura">
+          <span class="card-icon" aria-hidden="true">🗑️</span>
+          <span class="gasto-block-title">Bateas de basura</span>
+          <p><strong>Ubicación:</strong> sector de oficina/container (ver plano).<br><strong>Horario:</strong> por confirmar.<br><strong>Retiro:</strong> empresa contratada, frecuencia por confirmar.</p>
+        </div>
+        <div class="gasto-block" data-s="Qué residuos se pueden depositar">
+          <span class="gasto-block-title">Sí se puede</span>
+          <ul class="si"><li>Basura domiciliaria en bolsas cerradas.</li><li>Reciclables limpios (si hay contenedor).</li></ul>
+        </div>
+        <div class="gasto-block" data-s="Qué residuos no se pueden depositar">
+          <span class="gasto-block-title">No se puede</span>
+          <ul class="no"><li>Escombros y restos de construcción.</li><li>Ramas y poda.</li><li>Muebles, electrodomésticos, neumáticos.</li><li>Residuos peligrosos (aceites, baterías).</li></ul>
+        </div>
+    </div>
+    <div class="nota" data-s="Terreno arrendado bateas oficina">El terreno donde están la <strong>oficina/container y las bateas es arrendado</strong>; no es propiedad del Valle. Se eligió por su ubicación de fácil acceso para el camión recolector.</div>
   </section>
 
   <!-- PROYECTOS -->
@@ -1623,21 +2133,122 @@ footer {
         <div class="proyecto-progress">—</div>
       </div>
     </div>
-    <a href="https://drive.google.com/drive/folders/TU_CARPETA_PROYECTOS" target="_blank" rel="noopener" class="drive-link">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
-      Ver todos los proyectos en Drive
-    </a>
+  </section>
+
+  <!-- SEGURIDAD Y EMERGENCIAS -->
+  <section id="seguridad">
+    <div class="section-header">
+      <div class="section-accent"></div>
+      <h2 class="section-title">🧯 Seguridad y Emergencias</h2>
+      <div class="section-rule"></div>
+      <span class="section-updated">Actualizado sep 2026</span>
+    </div>
+    <p class="sub-title">Números de emergencia</p>
+    <div class="emerg-grid">
+      <div class="emerg-card" data-s="Bomberos 132 incendio"><span class="emerg-num">132</span><span class="emerg-label">Bomberos</span></div>
+      <div class="emerg-card" data-s="CONAF 130 incendio forestal"><span class="emerg-num">130</span><span class="emerg-label">CONAF · incendio forestal</span></div>
+      <div class="emerg-card" data-s="Ambulancia SAMU 131"><span class="emerg-num">131</span><span class="emerg-label">Ambulancia (SAMU)</span></div>
+      <div class="emerg-card" data-s="Carabineros 133"><span class="emerg-num">133</span><span class="emerg-label">Carabineros</span></div>
+      <div class="emerg-card" data-s="Portería teléfono"><span class="emerg-num small">+56 9 8276 0850</span><span class="emerg-label">Portería Valle Verde Mar</span></div>
+    </div>
+
+    <p class="sub-title">Ante un incendio</p>
+    <div class="steps">
+      <div class="step" data-s="Qué hacer ante un incendio"><div class="step-num">1</div><p class="step-title">Llama</p><p class="step-text">Al 132 o 130, y luego a portería. Indica sector y macrolote.</p></div>
+      <div class="step"><div class="step-num">2</div><p class="step-title">Aléjate</p><p class="step-text">No intentes apagar un fuego grande. Protege primero a las personas.</p></div>
+      <div class="step"><div class="step-num">3</div><p class="step-title">Evacúa</p><p class="step-text">Sigue la ruta de evacuación y las indicaciones de la Brigada.</p></div>
+      <div class="step"><div class="step-num">4</div><p class="step-title">Deja pasar</p><p class="step-text">Mantén los caminos libres para bomberos y brigadistas.</p></div>
+    </div>
+
+    <p class="sub-title">Brigada de Emergencias</p>
+    <div class="info-grid">
+        <div class="gasto-block" data-s="Qué es la Brigada de Emergencias">
+          <span class="card-icon" aria-hidden="true">🦺</span>
+          <span class="gasto-block-title">Quiénes son</span>
+          <p>Vecinos voluntarios capacitados para dar la primera respuesta ante incendios y emergencias dentro del Valle, mientras llegan los servicios oficiales.</p>
+        </div>
+        <div class="gasto-block" data-s="Cómo contactar a la Brigada">
+          <span class="card-icon" aria-hidden="true">📣</span>
+          <span class="gasto-block-title">Cómo contactarlos</span>
+          <p>Correo: <strong>brigada@vvm.cl</strong><br>En emergencia, llama primero al 132 y luego a portería.</p>
+        </div>
+        <div class="gasto-block" data-s="Cómo colaborar o participar de la Brigada">
+          <span class="card-icon" aria-hidden="true">🤝</span>
+          <span class="gasto-block-title">Cómo participar</span>
+          <p>Escribe a la Brigada. Se realizan capacitaciones y campañas de prevención durante el año, publicadas en <a href="#noticias" style="color:var(--brand)">Actualidad</a>.</p>
+        </div>
+    </div>
+
+    <p class="sub-title">Prevención y seguridad</p>
+    <div class="info-grid">
+        <div class="gasto-block" data-s="Recomendaciones de prevención de incendios">
+          <span class="card-icon" aria-hidden="true">🔥</span>
+          <span class="gasto-block-title">Prevención de incendios</span>
+          <ul><li>Mantén tu parcela limpia de pastizales secos.</li><li>No hagas quemas.</li><li>Ten agua y manguera disponibles.</li></ul>
+        </div>
+        <div class="gasto-block" data-s="Medidas preventivas de seguridad del Valle">
+          <span class="card-icon" aria-hidden="true">🔒</span>
+          <span class="gasto-block-title">Recomendaciones de seguridad</span>
+          <ul><li>Autoriza tus visitas con anticipación.</li><li>No prestes tu control remoto.</li><li>Avisa a portería si ves algo inusual.</li></ul>
+        </div>
+        <div class="gasto-block" data-s="Plan de Emergencias evacuación señalética">
+          <span class="card-icon" aria-hidden="true">🗺️</span>
+          <span class="gasto-block-title">Plan de Emergencias</span>
+          <p>Rutas de evacuación, puntos de encuentro y señalética.</p><p><a href="#documentos" style="color:var(--brand);font-weight:600">Ver Plan de Emergencias →</a></p>
+        </div>
+    </div>
   </section>
 
   <!-- DOCUMENTOS -->
   <section id="documentos">
     <div class="section-header">
       <div class="section-accent"></div>
-      <h2 class="section-title">Documentos</h2>
+      <h2 class="section-title">📄 Documentos y Normas</h2>
       <div class="section-rule"></div>
+      <span class="section-updated">Actualizado sep 2026</span>
     </div>
-    <div class="docs-list">
-      <a href="#" class="doc-item">
+    <div class="chips" id="docChips" role="group" aria-label="Filtrar documentos">
+      <button class="chip active" data-f="todos">Todos</button>
+      <button class="chip" data-f="reglamento">Reglamentos</button>
+      <button class="chip" data-f="protocolo">Protocolos</button>
+      <button class="chip" data-f="acta">Actas</button>
+      <button class="chip" data-f="rendicion">Rendiciones</button>
+      <button class="chip" data-f="otro">Otros</button>
+    </div>
+    <div class="docs-list" id="docsList">
+      <a href="#" class="doc-item" data-type="reglamento" data-s="Reglamento General — Valle Verde Mar">
+        <div class="doc-icon">PDF</div>
+        <div class="doc-text">
+          <p class="doc-name">Reglamento General — Valle Verde Mar</p>
+          <p class="doc-sub">Vigente · actualizado sep 2026</p>
+        </div>
+        <span class="doc-arrow">↓</span>
+      </a>
+      <a href="#" class="doc-item" data-type="protocolo" data-s="Protocolo de Accesos">
+        <div class="doc-icon">PDF</div>
+        <div class="doc-text">
+          <p class="doc-name">Protocolo de Accesos</p>
+          <p class="doc-sub">Visitas, trabajadores, camiones y controles · vigente</p>
+        </div>
+        <span class="doc-arrow">↓</span>
+      </a>
+      <a href="#" class="doc-item" data-type="otro" data-s="Plan de Emergencias">
+        <div class="doc-icon">PDF</div>
+        <div class="doc-text">
+          <p class="doc-name">Plan de Emergencias</p>
+          <p class="doc-sub">Evacuación, puntos de encuentro y contactos · vigente</p>
+        </div>
+        <span class="doc-arrow">↓</span>
+      </a>
+      <a href="#" class="doc-item" data-type="rendicion" data-s="Rendición de Gastos — 1er semestre 2026">
+        <div class="doc-icon">PDF</div>
+        <div class="doc-text">
+          <p class="doc-name">Rendición de Gastos — 1er semestre 2026</p>
+          <p class="doc-sub">Ingresos y egresos del periodo</p>
+        </div>
+        <span class="doc-arrow">↓</span>
+      </a>
+      <a href="#" class="doc-item" data-type="acta">
         <div class="doc-icon">PDF</div>
         <div class="doc-text">
           <p class="doc-name">Acta Asamblea — Abril 2026</p>
@@ -1645,7 +2256,7 @@ footer {
         </div>
         <span class="doc-arrow">↓</span>
       </a>
-      <a href="#" class="doc-item">
+      <a href="#" class="doc-item" data-type="acta">
         <div class="doc-icon">PDF</div>
         <div class="doc-text">
           <p class="doc-name">Acta Asamblea — Octubre 2025</p>
@@ -1653,7 +2264,7 @@ footer {
         </div>
         <span class="doc-arrow">↓</span>
       </a>
-      <a href="#" class="doc-item">
+      <a href="#" class="doc-item" data-type="reglamento">
         <div class="doc-icon">PDF</div>
         <div class="doc-text">
           <p class="doc-name">Reglamento Interno — Etapa 1</p>
@@ -1661,7 +2272,7 @@ footer {
         </div>
         <span class="doc-arrow">↓</span>
       </a>
-      <a href="#" class="doc-item">
+      <a href="#" class="doc-item" data-type="reglamento">
         <div class="doc-icon">PDF</div>
         <div class="doc-text">
           <p class="doc-name">Reglamento Interno — Etapa 2</p>
@@ -1670,17 +2281,85 @@ footer {
         <span class="doc-arrow">↓</span>
       </a>
     </div>
-    <a href="https://drive.google.com/drive/folders/TU_CARPETA_DOCUMENTOS" target="_blank" rel="noopener" class="drive-link">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
-      Ver todos los documentos en Drive
-    </a>
+      <p class="sub-title" id="protocolos" style="margin-top:28px">Protocolos · ¿Qué necesitas hacer?</p>
+    <div class="faq-list">
+      <div class="faq-item" data-s="Necesito que ingrese una visita">
+        <button class="faq-btn" onclick="toggleItem(this)" aria-expanded="false"><span>Necesito que ingrese una visita</span><span class="faq-icon" aria-hidden="true">+</span></button>
+        <div class="faq-body"><ol><li>Avisa a portería con anticipación (nombre y patente si viene en auto).</li><li>La visita se identifica al llegar.</li><li>Portería confirma contigo si no hay aviso previo.</li></ol></div>
+      </div>
+      <div class="faq-item" data-s="Necesito que ingrese un trabajador particular">
+        <button class="faq-btn" onclick="toggleItem(this)" aria-expanded="false"><span>Necesito que ingrese un trabajador particular</span><span class="faq-icon" aria-hidden="true">+</span></button>
+        <div class="faq-body"><ol><li>Informa a portería nombre, parcela de destino y días/horario de trabajo.</li><li>El trabajador se identifica en cada ingreso.</li><li>Tú eres responsable de su conducta dentro del Valle.</li></ol></div>
+      </div>
+      <div class="faq-item" data-s="Necesito ingresar un camión o maquinaria">
+        <button class="faq-btn" onclick="toggleItem(this)" aria-expanded="false"><span>Necesito ingresar un camión o maquinaria</span><span class="faq-icon" aria-hidden="true">+</span></button>
+        <div class="faq-body"><ol><li>Solicítalo con anticipación a portería o al Comité.</li><li>Indica tipo de vehículo, carga, fecha y ruta.</li><li>Se pueden aplicar restricciones de peso u horario para cuidar los caminos.</li></ol></div>
+      </div>
+      <div class="faq-item" data-s="Perdí mi control remoto / necesito uno nuevo">
+        <button class="faq-btn" onclick="toggleItem(this)" aria-expanded="false"><span>Perdí mi control remoto / necesito uno nuevo</span><span class="faq-icon" aria-hidden="true">+</span></button>
+        <div class="faq-body"><ol><li>Avisa de inmediato a portería para bloquear el control perdido.</li><li>Solicita la reposición según el procedimiento vigente.</li><li>La entrega es solo al propietario registrado.</li></ol></div>
+      </div>
+      <div class="faq-item" data-s="¿Cómo funciona el acceso automatizado?">
+        <button class="faq-btn" onclick="toggleItem(this)" aria-expanded="false"><span>¿Cómo funciona el acceso automatizado?</span><span class="faq-icon" aria-hidden="true">+</span></button>
+        <div class="faq-body">Los propietarios registrados ingresan con su dispositivo de acceso. Si el sistema falla, dirígete a portería, que registrará tu ingreso manualmente.</div>
+      </div>
+      <div class="faq-item" data-s="Servicios recurrentes y proveedores">
+        <button class="faq-btn" onclick="toggleItem(this)" aria-expanded="false"><span>Servicios recurrentes y proveedores</span><span class="faq-icon" aria-hidden="true">+</span></button>
+        <div class="faq-body">Gas, agua, delivery y otros proveedores frecuentes se registran en portería. Avisa si un proveedor vendrá de forma periódica a tu parcela.</div>
+      </div>
+      <div class="faq-item" data-s="Acceso a servicios y situación de GGCC">
+        <button class="faq-btn" onclick="toggleItem(this)" aria-expanded="false"><span>Acceso a servicios y situación de GGCC</span><span class="faq-icon" aria-hidden="true">+</span></button>
+        <div class="faq-body">Cualquier medida sobre acceso a servicios del Valle asociada a la situación de Gastos Comunes se aplica <strong>solo conforme a la regulación vigente y con validación jurídica</strong>. Consulta el reglamento.</div>
+      </div>
+      <div class="faq-item" data-s="¿Qué pasa si no se cumple el protocolo?">
+        <button class="faq-btn" onclick="toggleItem(this)" aria-expanded="false"><span>¿Qué pasa si no se cumple el protocolo?</span><span class="faq-icon" aria-hidden="true">+</span></button>
+        <div class="faq-body">Portería registra el incumplimiento e informa al Comité, que puede aplicar las medidas que indique el reglamento.</div>
+      </div>
+    </div>
+    <p class="nota">¿Necesitas el detalle completo? Descarga el <strong>Protocolo de Accesos</strong> arriba (filtro “Protocolos”).</p>
+
+    <p class="sub-title" id="mascotas" style="margin-top:28px">Tenencia responsable de mascotas</p>
+    <div class="info-grid" style="grid-template-columns:repeat(auto-fit,minmax(200px,1fr))">
+        <div class="gasto-block" data-s="Normas de tenencia responsable de mascotas perros sueltos">
+          <span class="card-icon" aria-hidden="true">🐕</span>
+          <span class="gasto-block-title">Normas básicas</span>
+          <ul><li>Perros siempre dentro de tu parcela o con correa en caminos.</li><li>Identificación y vacunas al día.</li><li>Recoge sus desechos.</li></ul>
+        </div>
+        <div class="gasto-block" data-s="Deberes del propietario de mascota">
+          <span class="card-icon" aria-hidden="true">🏠</span>
+          <span class="gasto-block-title">Tus deberes</span>
+          <ul><li>Evitar ladridos persistentes y molestias.</li><li>Prevenir ataques a personas, animales o ganado.</li><li>Cercos en buen estado.</li></ul>
+        </div>
+        <div class="gasto-block" data-s="Grupo Patitas perro perdido">
+          <span class="card-icon" aria-hidden="true">🐾</span>
+          <span class="gasto-block-title">Grupo “Patitas”</span>
+          <p>Grupo de vecinos que ayuda con mascotas perdidas, adopciones y campañas. Si encuentras un perro perdido, avísales.</p>
+        </div>
+        <div class="gasto-block" data-s="Denunciar perro agresivo mascotas">
+          <span class="card-icon" aria-hidden="true">📢</span>
+          <span class="gasto-block-title">Denuncias</span>
+          <p>Perro agresivo o situación de riesgo: avisa a portería y escribe al Comité desde <a href="#contactos" style="color:var(--brand)">Contacto</a>, indicando lugar y hora.</p>
+        </div>
+    </div>
+  </section>
+
+  <!-- PREGUNTAS FRECUENTES -->
+  <section id="faq">
+    <div class="section-header">
+      <div class="section-accent"></div>
+      <h2 class="section-title">❓ Preguntas Frecuentes</h2>
+      <div class="section-rule"></div>
+    </div>
+    <div class="faq-list" id="faqList">
+      <div class="car-loading"><div class="car-spinner"></div>Cargando preguntas…</div>
+    </div>
   </section>
 
   <!-- CONTACTOS -->
   <section id="contactos">
     <div class="section-header">
       <div class="section-accent"></div>
-      <h2 class="section-title">Contactos</h2>
+      <h2 class="section-title">📞 Contacto</h2>
       <div class="section-rule"></div>
     </div>
     <div class="contactos-section">
@@ -1749,6 +2428,56 @@ footer {
           <span class="macrolote-result-cargo" id="macroloteCargo"></span>
           <a class="macrolote-result-email" id="macroloteEmail" href="#"></a>
         </div>
+      </div>
+
+
+      <!-- Brigada y emergencias -->
+      <div class="contactos-row">
+        <div class="contacto-grupo">
+          <p class="contacto-grupo-title">Brigada de Emergencias</p>
+          <div class="contacto-card" data-s="Contacto Brigada de Emergencias">
+            <span class="contacto-role">Brigada VVM</span>
+            <span class="contacto-email">brigada@vvm.cl</span>
+          </div>
+        </div>
+        <div class="contacto-grupo">
+          <p class="contacto-grupo-title">Portería</p>
+          <div class="contacto-card" data-s="Contacto Portería">
+            <span class="contacto-role">Portería Valle Verde Mar</span>
+            <span class="contacto-email">+56 9 8276 0850</span>
+          </div>
+        </div>
+        <div class="contacto-grupo">
+          <p class="contacto-grupo-title">Emergencias públicas</p>
+          <div class="contacto-card" data-s="Teléfonos de emergencia públicos">
+            <span class="contacto-role">Bomberos 132 · CONAF 130</span>
+            <span class="contacto-email">SAMU 131 · Carabineros 133</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Consultas, reclamos y sugerencias -->
+      <div class="macrolote-selector-wrap" data-s="Formulario consultas reclamos sugerencias">
+        <p class="macrolote-selector-label">Consultas, reclamos o sugerencias</p>
+        <form id="contactForm" class="form-grid">
+          <label for="cfTipo">Tipo
+            <select id="cfTipo" class="macrolote-select">
+              <option>Consulta</option><option>Reclamo</option><option>Sugerencia</option>
+            </select>
+          </label>
+          <label for="cfDest">¿A quién va dirigido?
+            <select id="cfDest" class="macrolote-select">
+              <option value="comite@vvm.cl">Comité General</option>
+              <option value="tesoreria@vvm.cl">Tesorería (Gastos Comunes)</option>
+              <option value="brigada@vvm.cl">Brigada de Emergencias</option>
+            </select>
+          </label>
+          <label for="cfMsg" class="full">Mensaje
+            <textarea id="cfMsg" placeholder="Escribe tu mensaje. Indica tu macrolote si corresponde." required></textarea>
+          </label>
+          <button type="submit" class="btn-primary">Preparar mensaje</button>
+          <p id="cfOut" class="form-msg full" hidden></p>
+        </form>
       </div>
 
     </div>
@@ -1983,27 +2712,31 @@ function renderNoticiasSlide(mes) {
       var n = String(j + 1).padStart(2, '0');
       var numLabel = 'Noticias ' + mes.label.split(' ')[0] + ' #' + n;
       var tipo = (item['tipo'] || '').toLowerCase();
+      var cat = catKey(item['categoria'] || item['category'] || 'noticia');
       var cls = 'noticia-card' + (j === 0 ? ' featured' : '') + (tipo === 'important' ? ' important' : '');
       var tagCls = 'noticia-tag' + (tipo === '' || tipo === 'general' ? ' green' : '');
-      var titulo = (item['titulo'] || item['title'] || '');
-      var cuerpo = (item['cuerpo'] || item['texto'] || item['body'] || '');
-      var fecha  = (item['fecha'] || item['date'] || '');
-      var dataTag = numLabel.replace(/'/g, '&#39;');
-      var dataTit = titulo.replace(/'/g, '&#39;');
-      var dataCuerpo = cuerpo.replace(/'/g, '&#39;');
-      var dataFecha  = fecha.replace(/'/g, '&#39;');
-      var leerMas = cuerpo.length > 120
-        ? '<button class="noticia-leer-mas" onclick="openNoticiaModal(\'' + dataTag + '\',\'' + dataTit + '\',\'' + dataCuerpo + '\',\'' + dataFecha + '\')">Leer más →</button>'
-        : '';
-      return '<div class="' + cls + '">' +
+      return '<div class="' + cls + '" data-cat="' + cat + '" data-s="' + (item['titulo'] || '').replace(/"/g,'&quot;') + '">' +
         '<span class="' + tagCls + '">' + numLabel + '</span>' +
-        '<h3 class="noticia-title">' + titulo + '</h3>' +
-        '<p class="noticia-body">' + cuerpo + '</p>' +
-        leerMas +
-        '<span class="noticia-date">' + fecha + '</span>' +
+        '<h3 class="noticia-title">' + (item['titulo'] || item['title'] || '') + '</h3>' +
+        '<p class="noticia-body">' + (item['cuerpo'] || item['texto'] || item['body'] || '') + '</p>' +
+        '<span class="noticia-date">' + (item['fecha'] || item['date'] || '') + ' · ' + CAT_LABEL[cat] + '</span>' +
       '</div>';
     }).join('') +
-  '</div>';
+  '</div>' +
+  '<div class="car-error news-empty" hidden>No hay publicaciones de este tipo en este mes.</div>';
+}
+
+var CAT_LABEL = { comunicado:'Comunicado', noticia:'Noticia', asamblea:'Asamblea', actividad:'Actividad', emergencia:'Emergencia' };
+function catKey(v) {
+  v = norm(v);
+  if (v.indexOf('comunic') === 0) return 'comunicado';
+  if (v.indexOf('asamb') === 0) return 'asamblea';
+  if (v.indexOf('activ') === 0) return 'actividad';
+  if (v.indexOf('emerg') === 0) return 'emergencia';
+  return 'noticia';
+}
+function norm(t) {
+  return String(t || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
 }
 
 // ── Render FAQ ──
@@ -2014,18 +2747,30 @@ function renderFAQ(items) {
     list.innerHTML = '<div class="car-error">No hay preguntas frecuentes publicadas aún.</div>';
     return;
   }
-  list.innerHTML = items.map(function(it, i) {
+  var groups = [], map = {};
+  items.forEach(function(it) {
     var p = it['pregunta'] || it['pregunta '] || '';
-    var r = it['respuesta'] || it['respuesta '] || '';
-    if (!p) return '';
-    return '<div class="faq-item" id="faq-' + i + '">' +
-      '<button class="faq-btn" onclick="toggleFAQ(' + i + ')" aria-expanded="false">' +
-        '<span>' + p + '</span>' +
-        '<span class="faq-icon" aria-hidden="true">+</span>' +
-      '</button>' +
-      '<div class="faq-body">' + r + '</div>' +
-    '</div>';
-  }).join('');
+    if (!p) return;
+    var g = it['categoria'] || it['materia'] || 'General';
+    if (!map[g]) { map[g] = []; groups.push(g); }
+    map[g].push(it);
+  });
+  var html = '', i = 0;
+  groups.forEach(function(g) {
+    html += '<p class="faq-group-title">' + g + '</p>';
+    map[g].forEach(function(it) {
+      var p = it['pregunta'] || it['pregunta '] || '';
+      var r = it['respuesta'] || it['respuesta '] || '';
+      html += '<div class="faq-item" id="faq-' + (i++) + '" data-s="' + p.replace(/"/g,'&quot;') + '">' +
+        '<button class="faq-btn" onclick="toggleItem(this)" aria-expanded="false">' +
+          '<span>' + p + '</span>' +
+          '<span class="faq-icon" aria-hidden="true">+</span>' +
+        '</button>' +
+        '<div class="faq-body">' + r + '</div>' +
+      '</div>';
+    });
+  });
+  list.innerHTML = html;
 }
 
 // ── Macrolote selector ──
@@ -2070,19 +2815,17 @@ function showMacrolote(val) {
   result.classList.add('visible');
 }
 
-function toggleFAQ(i) {
-  var item = document.getElementById('faq-' + i);
+function toggleItem(btn, forceOpen) {
+  var item = btn.closest('.faq-item');
   if (!item) return;
   var open = item.classList.contains('open');
-  // Cerrar todos
-  document.querySelectorAll('.faq-item.open').forEach(function(el) {
+  item.parentElement.querySelectorAll('.faq-item.open').forEach(function(el) {
     el.classList.remove('open');
     el.querySelector('.faq-btn').setAttribute('aria-expanded', 'false');
   });
-  // Abrir el clickeado si estaba cerrado
-  if (!open) {
+  if (!open || forceOpen) {
     item.classList.add('open');
-    item.querySelector('.faq-btn').setAttribute('aria-expanded', 'true');
+    btn.setAttribute('aria-expanded', 'true');
   }
 }
 
@@ -2100,26 +2843,65 @@ var DEMO_UPDATES = [
 ];
 var DEMO_NOTICIAS = [
   { label: 'Septiembre 2026', items: [
-    { titulo: 'Asamblea general ordinaria — 28 de septiembre 2026', cuerpo: 'Se convoca a todos los propietarios. Orden del día: presupuesto 2027, elección directiva Etapa 2, informe de obras. Sede comunitaria · 10:00 hrs.', fecha: '5 sep 2026', tipo: 'featured' },
-    { titulo: 'Nuevo sistema de pago de gastos comunes en línea', cuerpo: 'A partir de octubre los gastos comunes podrán pagarse por transferencia o portal web. Se eliminan los pagos en efectivo presenciales.', fecha: '2 sep 2026', tipo: 'important' }
+    { titulo: 'Asamblea general ordinaria — 28 de septiembre 2026', cuerpo: 'Se convoca a todos los propietarios. Orden del día: presupuesto 2027, elección directiva Etapa 2, informe de obras. Sede comunitaria · 10:00 hrs.', fecha: '5 sep 2026', tipo: 'featured', categoria: 'Asamblea' },
+    { titulo: 'Nuevo sistema de pago de gastos comunes en línea', cuerpo: 'A partir de octubre los gastos comunes podrán pagarse por transferencia o portal web. Se eliminan los pagos en efectivo presenciales.', fecha: '2 sep 2026', tipo: 'important', categoria: 'Comunicado' }
   ]},
   { label: 'Agosto 2026', items: [
-    { titulo: 'Aprobación presupuesto extraordinario — mejoras camino acceso', cuerpo: 'La asamblea del 12 de agosto aprobó $28.000.000 para la repavimentación del camino principal de Etapa 1. Trabajos comienzan en septiembre.', fecha: '13 ago 2026', tipo: 'featured' },
-    { titulo: 'Campaña de limpieza de senderos — septiembre 2026', cuerpo: 'El comité general organiza una jornada de limpieza de los senderos peatonales para el sábado 20 de septiembre. ¡Todos invitados!', fecha: '8 ago 2026', tipo: '' }
+    { titulo: 'Aprobación presupuesto extraordinario — mejoras camino acceso', cuerpo: 'La asamblea del 12 de agosto aprobó $28.000.000 para la repavimentación del camino principal de Etapa 1. Trabajos comienzan en septiembre.', fecha: '13 ago 2026', tipo: 'featured', categoria: 'Asamblea' },
+    { titulo: 'Campaña de limpieza de senderos — septiembre 2026', cuerpo: 'El comité general organiza una jornada de limpieza de los senderos peatonales para el sábado 20 de septiembre. ¡Todos invitados!', fecha: '8 ago 2026', tipo: '', categoria: 'Actividad' }
   ]}
 ];
 
 var DEMO_FAQ = [
-  { pregunta: '¿Cuándo vence el pago de los gastos comunes?', respuesta: 'Los gastos comunes vencen el día 15 de cada mes. Pasada esa fecha se aplica un recargo según lo establecido en el reglamento interno.' },
-  { pregunta: '¿Cómo pago los gastos comunes?', respuesta: 'Por transferencia bancaria a <strong>Comunidad VVM · Banco Estado</strong>, cuenta corriente 00-123456-78, RUT 65.432.100-9. En el asunto indica tu número de parcela.' },
-  { pregunta: '¿Qué hago si hay un problema de seguridad urgente?', respuesta: 'Contacta directamente a la garita de acceso o llama al número de emergencias de la comunidad disponible en portería. Para situaciones graves llama al 133 (Carabineros) o al 132 (Bomberos).' },
-  { pregunta: '¿Puedo hacer obras en mi parcela sin avisar?', respuesta: 'No. Toda obra que modifique el exterior de la parcela o afecte áreas comunes debe ser informada y aprobada por el comité correspondiente antes de comenzar. Consulta el reglamento interno.' },
-  { pregunta: '¿Cómo me entero de las asambleas?', respuesta: 'Las asambleas son convocadas con al menos 15 días de anticipación a través del canal de WhatsApp de la comunidad y publicadas en este portal en la sección Noticias Importantes.' },
-  { pregunta: '¿Qué es el Comité General y para qué sirve?', respuesta: 'El Comité General está formado por los presidentes de cada comité de etapa. Toma decisiones que afectan a toda la comunidad: contratación de servicios, obras mayores, presupuesto anual y resolución de conflictos entre etapas.' },
-  { pregunta: '¿Puedo tener mascotas en mi parcela?', respuesta: 'Sí, siempre que no causen molestias a los vecinos ni se suelten en zonas comunes. Las mascotas en caminos y áreas comunes deben ir con correa. El comité puede mediar en casos de conflicto.' },
-  { pregunta: '¿Cómo postulo a ser parte de un comité?', respuesta: 'Las elecciones de directiva se realizan en asambleas ordinarias. Cualquier propietario al día en sus pagos puede postularse. Comunícate con la secretaría de tu etapa para informarte del calendario electoral.' },
-  { pregunta: '¿Dónde puedo ver los estados financieros de la comunidad?', respuesta: 'Los estados financieros anuales auditados se publican en la sección Documentos de este portal después de cada asamblea ordinaria. También puedes solicitarlos por correo a tesoreria@vvm.cl.' },
-  { pregunta: '¿Qué pasa si no pago los gastos comunes por varios meses?', respuesta: 'La deuda acumula recargos y puede derivar en acciones de cobranza extrajudicial o judicial según lo estipulado en el reglamento. Si tienes dificultades de pago, contacta a la tesorería para buscar un acuerdo.' }
+  { categoria: "Gastos comunes", pregunta: "¿Cuándo vence el gasto común?", respuesta: "El día <strong>15 de cada mes</strong>. Pasada esa fecha se aplica el recargo que indica el reglamento." },
+  { categoria: "Gastos comunes", pregunta: "¿Dónde y cómo pago?", respuesta: "Por transferencia a <strong>Comunidad VVM · Banco Estado</strong>, cta. cte. 00-123456-78, RUT 65.432.100-9. En el asunto indica tu número de parcela." },
+  { categoria: "Gastos comunes", pregunta: "¿Qué sucede si no pago mi gasto común?", respuesta: "La deuda acumula recargos y puede pasar a cobranza según el reglamento. Si tienes dificultades, escribe a tesorería antes de atrasarte." },
+  { categoria: "Gastos comunes", pregunta: "¿Qué financia el gasto común?", respuesta: "Mantención de caminos, conserjería y accesos, retiro de basura, seguridad y administración. Ver el detalle en <a href=\"#gastos\">Gastos Comunes</a>." },
+  { categoria: "Gastos comunes", pregunta: "¿Cómo puedo consultar si tengo deuda?", respuesta: "Escribe a <strong>tesoreria@vvm.cl</strong> indicando tu número de parcela." },
+  { categoria: "Gastos comunes", pregunta: "¿Puedo solicitar un convenio de pago?", respuesta: "Sí. Solicítalo por correo a tesorería; se evalúa caso a caso." },
+  { categoria: "Gastos comunes", pregunta: "¿Por qué existen fondos de reserva o provisión?", respuesta: "Para cubrir imprevistos y reparaciones mayores sin tener que hacer cobros extraordinarios de golpe." },
+  { categoria: "Caminos e infraestructura", pregunta: "¿Quién mantiene los caminos?", respuesta: "Los caminos comunes los mantiene el Comité General con un contratista. Los caminos internos de cada macrolote, su propia directiva." },
+  { categoria: "Caminos e infraestructura", pregunta: "¿Cómo se decide qué camino mantener primero?", respuesta: "Según seguridad, uso, daño y presupuesto disponible. Ver <a href=\"#infraestructura\">Infraestructura</a>." },
+  { categoria: "Caminos e infraestructura", pregunta: "¿Por qué se utiliza maicillo?", respuesta: "Porque compacta bien, drena el agua y es más económico que pavimentar." },
+  { categoria: "Caminos e infraestructura", pregunta: "¿Qué maquinaria se necesita para mantener un camino?", respuesta: "Normalmente motoniveladora, camión aljibe, rodillo, excavadora y camión tolva, según el trabajo." },
+  { categoria: "Caminos e infraestructura", pregunta: "¿Por qué es importante contar con material y maquinaria cerca?", respuesta: "Porque baja los costos de traslado y permite reparar más rápido y más seguido." },
+  { categoria: "Caminos e infraestructura", pregunta: "¿Qué ocurre si el material debe traerse desde más lejos?", respuesta: "Cada mantención cuesta más y tarda más, por lo que con el mismo presupuesto se pueden hacer menos." },
+  { categoria: "Accesos", pregunta: "¿Cómo autorizo una visita?", respuesta: "Avisa a portería con anticipación con el nombre (y patente si viene en auto). Ver <a href=\"#protocolos\">Protocolos</a>." },
+  { categoria: "Accesos", pregunta: "¿Cómo ingresa un trabajador?", respuesta: "Informa a portería su nombre, parcela de destino y días/horario de trabajo." },
+  { categoria: "Accesos", pregunta: "¿Cómo solicito el ingreso de un camión o maquinaria?", respuesta: "Con anticipación, a portería o al Comité, indicando tipo de vehículo, carga, fecha y ruta." },
+  { categoria: "Accesos", pregunta: "¿Qué hago si pierdo mi control remoto?", respuesta: "Avisa de inmediato a portería para bloquearlo y solicita la reposición." },
+  { categoria: "Accesos", pregunta: "¿Qué hago si el sistema de acceso presenta una falla?", respuesta: "Dirígete a portería, que registrará tu ingreso manualmente, y reporta la falla." },
+  { categoria: "Basura", pregunta: "¿Dónde están ubicadas las bateas?", respuesta: "En el sector de oficina/container. Ver el <a href=\"#plano\">plano</a>." },
+  { categoria: "Basura", pregunta: "¿Qué residuos puedo depositar y cuáles no?", respuesta: "Sí: basura domiciliaria en bolsas cerradas. No: escombros, ramas, muebles, electrodomésticos ni residuos peligrosos." },
+  { categoria: "Basura", pregunta: "¿Cómo se accede a las bateas de basura?", respuesta: "Dentro del horario informado en <a href=\"#infraestructura\">Infraestructura</a>." },
+  { categoria: "Basura", pregunta: "¿Quién realiza el retiro?", respuesta: "Una empresa contratada por el Comité General." },
+  { categoria: "Basura", pregunta: "¿El terreno donde están las bateas pertenece al Valle?", respuesta: "No. Es un terreno arrendado." },
+  { categoria: "Basura", pregunta: "¿Por qué están ubicadas en ese sector?", respuesta: "Por su fácil acceso para el camión recolector y los vecinos." },
+  { categoria: "Mascotas", pregunta: "¿Pueden circular perros sueltos?", respuesta: "No. Deben estar dentro de su parcela o con correa en los caminos." },
+  { categoria: "Mascotas", pregunta: "¿Qué hago si encuentro un perro perdido?", respuesta: "Avisa a portería y al grupo “Patitas”." },
+  { categoria: "Mascotas", pregunta: "¿Qué hago frente a un perro agresivo?", respuesta: "Aléjate sin correr, avisa a portería y reporta la situación al Comité." },
+  { categoria: "Mascotas", pregunta: "¿Qué responsabilidades tiene el propietario de una mascota?", respuesta: "Mantenerla controlada, identificada y vacunada, y evitar molestias o riesgos a otros." },
+  { categoria: "Mascotas", pregunta: "¿Dónde puedo informar una situación relacionada con mascotas?", respuesta: "En portería o desde el formulario de <a href=\"#contactos\">Contacto</a>." },
+  { categoria: "Emergencias", pregunta: "¿A quién debo llamar ante un incendio o emergencia?", respuesta: "Bomberos <strong>132</strong> o CONAF <strong>130</strong>, y luego a portería." },
+  { categoria: "Emergencias", pregunta: "¿Qué es la Brigada de Emergencias?", respuesta: "Un grupo de vecinos voluntarios capacitados para dar la primera respuesta dentro del Valle." },
+  { categoria: "Emergencias", pregunta: "¿Cómo contacto a la Brigada?", respuesta: "Por correo a <strong>brigada@vvm.cl</strong>. En emergencia, llama primero al 132." },
+  { categoria: "Emergencias", pregunta: "¿Dónde encuentro el Plan de Emergencias?", respuesta: "En <a href=\"#documentos\">Documentos y Normas</a>." },
+  { categoria: "Emergencias", pregunta: "¿Qué debo hacer ante una evacuación?", respuesta: "Mantén la calma, sigue la ruta señalizada y las indicaciones de la Brigada, y deja los caminos libres." },
+  { categoria: "Organización de la comunidad", pregunta: "¿Quién administra Valle Verde Mar?", respuesta: "El Comité General, formado por las directivas de cada Etapa. Todos son vecinos voluntarios." },
+  { categoria: "Organización de la comunidad", pregunta: "¿Qué hace el Comité General?", respuesta: "Decide sobre lo común: caminos principales, accesos, servicios, presupuesto anual y temas entre Etapas." },
+  { categoria: "Organización de la comunidad", pregunta: "¿Qué hace el Comité de mi Etapa?", respuesta: "Ve los temas propios de tu Etapa y la representa ante el Comité General." },
+  { categoria: "Organización de la comunidad", pregunta: "¿A quién debo contactar según mi consulta?", respuesta: "Gastos comunes: tesorería. Accesos: portería. Emergencias: Brigada. Todo lo demás: Comité General. Ver <a href=\"#contactos\">Contacto</a>." },
+  { categoria: "Organización de la comunidad", pregunta: "¿Qué es un macrolote?", respuesta: "Un terreno mayor que se subdividió en parcelas. Puede tener su propia directiva." },
+  { categoria: "Territorio", pregunta: "¿Cuáles son los límites del Valle?", respuesta: "Ver <a href=\"#plano\">Plano y territorio</a>." },
+  { categoria: "Territorio", pregunta: "¿Todos los caminos que utilizamos pertenecen al Valle?", respuesta: "No. Algunos son privados o servidumbres. El plano los diferencia." },
+  { categoria: "Territorio", pregunta: "¿Qué es una servidumbre?", respuesta: "Un derecho de paso o uso sobre un terreno de otro dueño, como las franjas de Lincoyan o Sonacol." },
+  { categoria: "Territorio", pregunta: "¿Dónde puedo consultar el plano del Valle?", respuesta: "En <a href=\"#plano\">Nuestro Valle → Plano y territorio</a>." }
+];
+
+var DEMO_AGENDA = [
+  { dia: '12', mes: 'Oct', titulo: 'Asamblea general ordinaria', detalle: 'Sede comunitaria · 10:00 hrs' },
+  { dia: '19', mes: 'Oct', titulo: 'Capacitación Brigada: uso de extintores', detalle: 'Portería · 11:00 hrs · abierta a vecinos' },
+  { dia: '26', mes: 'Oct', titulo: 'Jornada de limpieza de ductos', detalle: 'Punto de encuentro: oficina · 09:30 hrs' }
 ];
 
 // ── Inicialización principal ──
@@ -2160,6 +2942,136 @@ var DEMO_FAQ = [
     });
 })();
 
+// ── Agenda (próximas asambleas y actividades) ──
+function renderAgenda(items) {
+  var el = document.getElementById('agendaList');
+  if (!el) return;
+  if (!items || !items.length) { el.innerHTML = '<div class="car-error">No hay actividades programadas por ahora.</div>'; return; }
+  el.innerHTML = items.map(function(a) {
+    return '<div class="agenda-item" data-s="' + (a.titulo || '').replace(/"/g,'&quot;') + '">' +
+      '<div class="agenda-date"><div class="agenda-day">' + (a.dia || '') + '</div><div class="agenda-mon">' + (a.mes || '') + '</div></div>' +
+      '<div class="agenda-text"><p class="agenda-title">' + (a.titulo || '') + '</p><p class="agenda-sub">' + (a.detalle || '') + '</p></div>' +
+    '</div>';
+  }).join('');
+}
+renderAgenda(DEMO_AGENDA);
+if (VVM_SHEET_ID !== 'TU_SHEET_ID_AQUI' && VVM_SHEET_ID.length > 10) {
+  fetchTab('Agenda').then(function(rows) { if (rows.length) renderAgenda(rows); }).catch(function() {});
+}
+
+// ── Chips de filtro genéricos ──
+function setupChips(groupId, onChange) {
+  var g = document.getElementById(groupId);
+  if (!g) return;
+  g.addEventListener('click', function(e) {
+    var b = e.target.closest('.chip');
+    if (!b) return;
+    g.querySelectorAll('.chip').forEach(function(c) { c.classList.toggle('active', c === b); });
+    onChange(b.getAttribute('data-f'));
+  });
+}
+var newsFilter = 'todos';
+function applyNewsFilter() {
+  document.querySelectorAll('#carTrack .carousel-slide').forEach(function(slide) {
+    var shown = 0;
+    slide.querySelectorAll('.noticia-card').forEach(function(c) {
+      var ok = newsFilter === 'todos' || c.getAttribute('data-cat') === newsFilter;
+      c.hidden = !ok;
+      if (ok) shown++;
+    });
+    var empty = slide.querySelector('.news-empty');
+    if (empty) empty.hidden = shown > 0;
+  });
+}
+setupChips('newsChips', function(f) { newsFilter = f; applyNewsFilter(); });
+setupChips('docChips', function(f) {
+  document.querySelectorAll('#docsList .doc-item').forEach(function(d) {
+    d.hidden = !(f === 'todos' || d.getAttribute('data-type') === f);
+  });
+});
+
+// ── Buscador general ──
+(function() {
+  var input = document.getElementById('searchInput');
+  var box = document.getElementById('searchResults');
+  if (!input || !box) return;
+  var SIN = { ggcc: 'gastos comunes', camion: 'camion maquinaria', perro: 'mascotas perro', control: 'control remoto', incendio: 'incendio emergencia' };
+
+  function run() {
+    var q = norm(input.value.trim());
+    if (q.length < 2) { box.hidden = true; box.innerHTML = ''; return; }
+    var terms = (q + ' ' + (SIN[q] || '')).split(/\s+/).filter(Boolean);
+    var hits = [];
+    document.querySelectorAll('main [data-s]').forEach(function(el) {
+      if (el.closest('#inicio')) return;
+      var txt = norm(el.getAttribute('data-s') + ' ' + (el.getAttribute('data-k') || '') + ' ' + el.textContent);
+      var score = 0;
+      terms.forEach(function(t) { if (txt.indexOf(t) > -1) score += norm(el.getAttribute('data-s')).indexOf(t) > -1 ? 3 : 1; });
+      if (score) hits.push({ el: el, score: score });
+    });
+    hits.sort(function(a, b) { return b.score - a.score; });
+    hits = hits.slice(0, 8);
+    if (!hits.length) {
+      box.innerHTML = '<div class="search-empty">No encontramos resultados. Prueba con otra palabra o revisa <a href="#faq" style="color:var(--brand)">Preguntas Frecuentes</a>.</div>';
+    } else {
+      box.innerHTML = '';
+      hits.forEach(function(h) {
+        var sec = h.el.closest('section');
+        var secName = sec ? sec.querySelector('.section-title').textContent.replace(/^[^\wÁÉÍÓÚáéíóú¿]+/, '') : '';
+        var b = document.createElement('button');
+        b.className = 'search-result';
+        b.innerHTML = '<span></span><small></small>';
+        b.firstChild.textContent = h.el.getAttribute('data-s');
+        b.lastChild.textContent = secName;
+        b.addEventListener('click', function() { goToHit(h.el); });
+        box.appendChild(b);
+      });
+    }
+    box.hidden = false;
+  }
+
+  function goToHit(el) {
+    if (el.hidden) {
+      document.querySelectorAll('.chips').forEach(function(g) { var t = g.querySelector('[data-f="todos"]'); if (t) t.click(); });
+    }
+    var slide = el.closest('.carousel-slide');
+    if (slide && !slide.classList.contains('active')) {
+      var track = slide.parentElement, idx = Array.prototype.indexOf.call(track.children, slide);
+      var sel = document.getElementById(track.id === 'updTrack' ? 'updSelect' : 'carSelect');
+      if (sel) { sel.value = idx; sel.dispatchEvent(new Event('change')); }
+    }
+    if (el.classList.contains('faq-item') && !el.classList.contains('open')) toggleItem(el.querySelector('.faq-btn'));
+    el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    el.classList.add('flash');
+    setTimeout(function() { el.classList.remove('flash'); }, 1800);
+  }
+
+  input.addEventListener('input', run);
+  input.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') { var f = box.querySelector('.search-result'); if (f) f.click(); }
+    if (e.key === 'Escape') { input.value = ''; run(); }
+  });
+})();
+
+// ── Formulario de contacto (prepara el mensaje; no envía nada por sí solo) ──
+(function() {
+  var form = document.getElementById('contactForm');
+  if (!form) return;
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    var tipo = document.getElementById('cfTipo').value;
+    var dest = document.getElementById('cfDest').value;
+    var msg = document.getElementById('cfMsg').value.trim();
+    var out = document.getElementById('cfOut');
+    if (!msg) return;
+    var subject = tipo + ' — Portal Valle Verde Mar';
+    out.innerHTML = 'Envía tu mensaje a <strong></strong> con el asunto “' + subject + '”. ' +
+      '<a href="mailto:' + dest + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(msg) + '" style="color:var(--brand);font-weight:600">Abrir en mi correo →</a>';
+    out.querySelector('strong').textContent = dest;
+    out.hidden = false;
+  });
+})();
+
 // ── Menú hamburguesa ──
 (function() {
   var btn = document.getElementById('navHamburger');
@@ -2172,26 +3084,6 @@ var DEMO_FAQ = [
     document.body.style.overflow = open ? 'hidden' : '';
   });
 })();
-
-function openNoticiaModal(tag, titulo, cuerpo, fecha) {
-  document.getElementById('modalTag').textContent = tag;
-  document.getElementById('modalTitle').textContent = titulo;
-  document.getElementById('modalBody').textContent = cuerpo;
-  document.getElementById('modalDate').textContent = fecha;
-  var overlay = document.getElementById('noticiaModal');
-  overlay.classList.add('open');
-  document.body.style.overflow = 'hidden';
-}
-function closeNoticiaModal() {
-  document.getElementById('noticiaModal').classList.remove('open');
-  document.body.style.overflow = '';
-}
-function closeModal(e) {
-  if (e.target === document.getElementById('noticiaModal')) closeNoticiaModal();
-}
-document.addEventListener('keydown', function(e) {
-  if (e.key === 'Escape') closeNoticiaModal();
-});
 
 function closeMobileMenu() {
   var btn = document.getElementById('navHamburger');
